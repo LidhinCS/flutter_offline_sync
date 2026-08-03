@@ -23,7 +23,7 @@ this model is a strict superset of that pattern.
 
 ```dart
 // 1. Register handlers once at startup (and again in the background
-//    isolate entrypoint -- see example/background_sync_example.dart).
+//    isolate entrypoint -- see packages/offline_sync_flutter/example).
 final registry = SyncHandlerRegistry()
   ..register('uploadImage', UploadImageHandler(dio))
   ..register('createPost', CreatePostHandler(dio));
@@ -104,7 +104,7 @@ Two different concerns, don't conflate them:
   `workmanager`. Its callback runs in a genuinely separate OS-spawned
   isolate with no shared state, so you must re-open the database (same
   file path) and re-register every handler there. See
-  `example/background_sync_example.dart`.
+  `packages/offline_sync_flutter/example`.
 
 `SyncDatabase` opens sqlite in **WAL mode**, which is what makes it safe
 for the foreground app and the background isolate to hold independent
@@ -152,9 +152,17 @@ This generates `lib/src/db/database.g.dart`, which is not checked in.
 (This scaffold was built without network access to pub.dev, so codegen
 hasn't been run against it yet -- run the command above before first use.)
 
-`example/` is illustrative and assumes an app-level pubspec with `flutter`,
-`dio`, `workmanager`, and `connectivity_plus` -- it's not part of the
-package's own dependency graph.
+Each package has a runnable Flutter example under `example/`:
+
+| Package | Example | Demonstrates |
+|---|---|---|
+| `offline_sync_core` | `packages/offline_sync_core/example` | Job enqueue, `SyncEngine.syncAll()`, Drift streams |
+| `offline_sync_flutter` | `packages/offline_sync_flutter/example` | `FlutterSyncCoordinator`, Workmanager setup |
+| `offline_sync_ui` | `packages/offline_sync_ui/example` | `SyncStatusBadge`, `SyncScreenBanner`, list tiles |
+
+```bash
+cd packages/offline_sync_core/example && flutter run
+```
 
 ## Design decision: Drift is a direct dependency, not an abstraction
 

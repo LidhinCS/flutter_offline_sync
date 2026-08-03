@@ -1,17 +1,17 @@
-# example
+# offline_sync_core example
 
-A new Flutter project.
+Demonstrates the pure-Dart sync engine: enqueue a multi-step job, run
+`SyncEngine.syncAll()`, and watch job status update via Drift streams.
 
-## Getting Started
+## Run
 
-This project is a starting point for a Flutter application.
+```bash
+cd packages/offline_sync_core/example
+flutter pub get
+flutter run
+```
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Handlers in `lib/handlers.dart` are in-memory fakes — no Dio or network
+required. For Flutter adapters (Workmanager, connectivity), see
+`packages/offline_sync_flutter/example`. For UI widgets, see
+`packages/offline_sync_ui/example`.

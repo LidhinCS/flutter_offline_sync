@@ -1,39 +1,88 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# offline_sync_ui
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+Flutter UI widgets for [offline_sync_core](../offline_sync_core). Watches Drift
+job streams and shows sync status per screen or feature.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+## Quick start
 
 ```dart
-const like = 'sample';
+import 'package:offline_sync_ui/offline_sync_ui.dart';
+
+OfflineSyncScope(
+  db: db,
+  engine: engine,
+  child: MaterialApp(
+    home: CreatePostScreen(),
+  ),
+);
+
+class CreatePostScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Create post'),
+        actions: [
+          SyncStatusBadge(
+            db: OfflineSyncScope.of(context).db,
+            screen: 'create_post_screen',
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          SyncScreenBanner(screen: 'create_post_screen'),
+          // ... rest of screen
+        ],
+      ),
+    );
+  }
+}
 ```
 
-## Additional information
+When enqueueing jobs, set `meta` so list tiles can show a label:
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```dart
+await JobBuilder(
+  db,
+  feature: 'posts',
+  screen: 'create_post_screen',
+  meta: {'label': 'Upload photo'},
+)
+  .addStep('uploadImage', taskType: 'uploadImage', input: {'filePath': path})
+  .enqueue();
+```
+
+## Widgets
+
+| Widget | Purpose |
+|---|---|
+| `OfflineSyncScope` | Provides `SyncDatabase` + `SyncEngine` to descendants |
+| `SyncJobsBuilder` | Rebuilds on `watchJobsForScreen` / `watchJobsForFeature` |
+| `SyncStatusBadge` | Compact chip: "2 pending", "1 failed", etc. |
+| `SyncScreenBanner` | Screen-level banner with job list + discard pending |
+| `SyncJobListTile` | Single job row with retry for failed jobs |
+
+## Helpers
+
+- `countJobs` — group jobs by status
+- `activeJobs` — filter out success/cancelled
+- `jobDisplayLabel` — read `meta.label` for display
+- `jobStatusAppearance` — icon/color per `JobStatus`
+
+This package re-exports `offline_sync_core`.
+
+## Conflict resolution
+
+`SyncJobListTile` exposes `onConflictTap` for conflicted jobs. Wire it to your
+app's resolution UI, then call `engine.resolveConflict(...)`.
+
+## Example
+
+```bash
+cd packages/offline_sync_ui/example
+flutter run
+```
+
+The example app demonstrates `OfflineSyncScope`, `SyncStatusBadge`,
+`SyncScreenBanner`, and `SyncJobListTile` wired to live Drift streams.
