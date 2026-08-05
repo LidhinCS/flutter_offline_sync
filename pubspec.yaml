@@ -5,6 +5,76 @@ environment:
 workspace:
   - packages/offline_sync_ui
   - packages/offline_sync_core
+  - packages/offline_sync_pull
+  - packages/offline_sync_pull_flutter
   - packages/offline_sync_flutter
 dev_dependencies:
   melos: ^7.8.1
+
+melos:
+  categories:
+    core:
+      - packages/offline_sync_core
+    pull:
+      - packages/offline_sync_pull*
+    flutter:
+      - packages/offline_sync_flutter*
+      - packages/offline_sync_ui
+
+  scripts:
+    get:
+      description: Resolve dependencies for the whole workspace.
+      run: dart pub get
+
+    analyze:
+      description: Static analysis in all workspace packages.
+      run: |
+        set -e
+        for pkg in offline_sync_core offline_sync_pull offline_sync_flutter offline_sync_pull_flutter offline_sync_ui; do
+          echo "==> packages/$pkg"
+          dart analyze "packages/$pkg"
+        done
+
+    test:
+      description: Run tests in packages with a test directory.
+      run: |
+        set -e
+        for pkg in offline_sync_core offline_sync_pull offline_sync_flutter offline_sync_pull_flutter offline_sync_ui; do
+          if [ -d "packages/$pkg/test" ]; then
+            echo "==> packages/$pkg"
+            (cd "packages/$pkg" && flutter test)
+          fi
+        done
+
+    format:check:
+      description: Verify formatting (fails if changes are needed).
+      run: dart format --set-exit-if-changed packages/
+
+    format:fix:
+      description: Format all packages.
+      run: dart format packages/
+
+    build_runner:
+      description: Run Drift/build_runner codegen where needed.
+      run: |
+        set -e
+        for pkg in offline_sync_core offline_sync_pull; do
+          echo "==> packages/$pkg"
+          (cd "packages/$pkg" && dart run build_runner build --delete-conflicting-outputs)
+        done
+
+    clean:
+      description: Remove Flutter build artifacts.
+      run: |
+        set -e
+        for pkg in offline_sync_flutter offline_sync_pull_flutter offline_sync_ui; do
+          echo "==> packages/$pkg"
+          (cd "packages/$pkg" && flutter clean)
+        done
+
+    ci:
+      description: CI pipeline — analyze, test, and format check.
+      steps:
+        - analyze
+        - test
+        - format:check

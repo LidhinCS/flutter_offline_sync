@@ -1,4 +1,4 @@
-library offline_sync_flutter;
+library;
 
 export 'package:offline_sync_core/offline_sync_core.dart';
 

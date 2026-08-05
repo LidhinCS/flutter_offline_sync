@@ -758,6 +758,18 @@
       "languageVersion": "3.12"
     },
     {
+      "name": "offline_sync_pull",
+      "rootUri": "../packages/offline_sync_pull",
+      "packageUri": "lib/",
+      "languageVersion": "3.12"
+    },
+    {
+      "name": "offline_sync_pull_flutter",
+      "rootUri": "../packages/offline_sync_pull_flutter",
+      "packageUri": "lib/",
+      "languageVersion": "3.12"
+    },
+    {
       "name": "offline_sync_flutter",
       "rootUri": "../packages/offline_sync_flutter",
       "packageUri": "lib/",

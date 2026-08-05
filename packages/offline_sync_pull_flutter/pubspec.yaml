@@ -1,0 +1,26 @@
+name: offline_sync_pull_flutter
+publish_to: none
+description: >
+  Flutter adapters for offline_sync_pull: Workmanager background pull,
+  connectivity-triggered foreground pull.
+version: 0.1.0
+resolution: workspace
+publisher: lidhin.com
+
+environment:
+  sdk: ^3.12.2
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  offline_sync_pull:
+    path: ../offline_sync_pull
+  connectivity_plus: ^7.3.1
+  workmanager: ^0.10.1+2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  drift: ^2.34.0
+  flutter_lints: ^6.0.0
