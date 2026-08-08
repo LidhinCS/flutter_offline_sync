@@ -169,12 +169,11 @@ cd packages/offline_sync_core/example && flutter run
 `offline_sync_core` commits directly to Drift/SQLite rather than hiding storage
 behind an interface (e.g. a `SyncStore`-style abstraction that Drift would
 be one implementation of). That indirection only pays for itself if you
-genuinely expect to swap storage engines later; given Drift is already the
-standardized choice across these apps, committing directly keeps the
+genuinely expect to swap storage engines later. Committing to Drift keeps the
 engine simpler to read and change. Revisit this only if a real second
 backend requirement shows up -- not preemptively.
 
-## Migrating an existing outbox-pattern sync engine (e.g. EDMS)
+## Migrating from a flat outbox queue
 
 | Existing concept | Maps to |
 |---|---|

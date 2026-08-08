@@ -12,6 +12,9 @@ hero:
     - theme: alt
       text: View on GitHub
       link: https://github.com/LidhinCS/flutter_offline_sync
+    - theme: alt
+      text: Buy me a coffee
+      link: https://buymeacoffee.com/lidhincs
 
 features:
   - title: Push queue
