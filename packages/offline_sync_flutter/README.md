@@ -1,6 +1,6 @@
 # offline_sync_flutter
 
-Flutter adapters for [offline_sync_core](../offline_sync_core): Workmanager
+Flutter adapters for [offline_sync_core](https://github.com/LidhinCS/flutter_offline_sync/tree/main/packages/offline_sync_core): Workmanager
 background sync, connectivity-triggered foreground sync, and startup recovery.
 
 `offline_sync_core` stays plain Dart and unit-testable without Flutter. This

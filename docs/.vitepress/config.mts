@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress'
 const github = 'https://github.com/LidhinCS/flutter_offline_sync'
 const buyMeACoffee = 'https://buymeacoffee.com/lidhincs'
 const buyMeACoffeeButton =
-  'https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&slug=lidhincs&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff'
+  'https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png'
 
 export default defineConfig({
   title: 'offline_sync',
@@ -94,7 +94,7 @@ export default defineConfig({
       text: 'Edit this page on GitHub',
     },
     footer: {
-      message: `Released under the MIT License.<br/><a href="${buyMeACoffee}" target="_blank" rel="noreferrer"><img src="${buyMeACoffeeButton}" alt="Buy me a coffee" height="45" style="margin-top: 10px" /></a>`,
+      message: `Released under the MIT License.<div class="bmc-footer-row"><a href="${buyMeACoffee}" target="_blank" rel="noreferrer"><img src="${buyMeACoffeeButton}" alt="Buy me a coffee" class="bmc-footer-button" /></a></div>`,
       copyright: 'Copyright © Lidhin',
     },
     search: {

@@ -1,0 +1,13 @@
+.VPFooter .bmc-footer-row {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  position: relative;
+  left: calc(-50vw + 50%);
+  margin-top: 10px;
+}
+
+.VPFooter .bmc-footer-button {
+  height: 32px;
+  width: auto;
+}

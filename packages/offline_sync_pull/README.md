@@ -1,7 +1,7 @@
 # offline_sync_pull
 
 Pull coordinator for offline-first Flutter/Dart apps. Complements
-[offline_sync_core](../offline_sync_core) on the **read** side: paginated list
+[offline_sync_core](https://github.com/LidhinCS/flutter_offline_sync/tree/main/packages/offline_sync_core) on the **read** side: paginated list
 sync, entity-batch detail sync, and Drift-backed checkpoints.
 
 `offline_sync_core` = push write queue.  
@@ -72,7 +72,7 @@ await pullCoordinator.runAll(); // offline_sync_pull
 ```
 
 For Workmanager + connectivity on the pull side, use
-[offline_sync_pull_flutter](../offline_sync_pull_flutter) (`runBackgroundPull`,
+[offline_sync_pull_flutter](https://github.com/LidhinCS/flutter_offline_sync/tree/main/packages/offline_sync_pull_flutter) (`runBackgroundPull`,
 `FlutterPullCoordinator`). See `packages/offline_sync_pull_flutter/example`.
 
 ## Example

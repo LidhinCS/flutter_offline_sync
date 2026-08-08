@@ -1,6 +1,6 @@
 # offline_sync_ui
 
-Flutter UI widgets for [offline_sync_core](../offline_sync_core). Watches Drift
+Flutter UI widgets for [offline_sync_core](https://github.com/LidhinCS/flutter_offline_sync/tree/main/packages/offline_sync_core). Watches Drift
 job streams and shows sync status per screen or feature.
 
 ## Quick start

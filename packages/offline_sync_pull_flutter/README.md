@@ -1,9 +1,9 @@
 # offline_sync_pull_flutter
 
-Flutter adapters for [offline_sync_pull](../offline_sync_pull): Workmanager
+Flutter adapters for [offline_sync_pull](https://github.com/LidhinCS/flutter_offline_sync/tree/main/packages/offline_sync_pull): Workmanager
 background pull and connectivity-triggered foreground pull.
 
-Pair with [offline_sync_flutter](../offline_sync_flutter) for full offline-first:
+Pair with [offline_sync_flutter](https://github.com/LidhinCS/flutter_offline_sync/tree/main/packages/offline_sync_flutter) for full offline-first:
 
 ```dart
 // Foreground
