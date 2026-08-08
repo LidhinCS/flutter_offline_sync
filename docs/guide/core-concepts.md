@@ -17,7 +17,7 @@ A single-step job with no dependencies is equivalent to a classic outbox row.
 
 | Concept | Meaning |
 | --- | --- |
-| **Feature** | Named sync unit (e.g. `documents`, `workflow`). |
+| **Feature** | Named sync unit (e.g. `posts`, `products`). |
 | **Step** | `PaginatedListPullStep` or `EntityBatchPullStep`. |
 | **Handler** | `PullStepHandler` — fetch page or batch, upsert into **App DB**. |
 | **Checkpoint** | Row in `PullDatabase` — current page, `hasMore`, status. |

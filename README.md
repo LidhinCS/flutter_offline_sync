@@ -1,6 +1,6 @@
 # offline_sync
 
-Offline-first sync monorepo for Flutter/Dart: **push** write queue, **pull** coordinator, Flutter adapters, and optional UI widgets.
+Offline-first sync for Flutter/Dart: **push** write queue, **pull** coordinator, Flutter adapters, and optional UI widgets.
 
 📖 **[Documentation](https://lidhin.github.io/flutter_offline_sync/)** · [GitHub](https://github.com/LidhinCS/flutter_offline_sync)
 
@@ -27,7 +27,7 @@ dependencies:
 
 See the [installation guide](https://lidhin.github.io/flutter_offline_sync/guide/installation) for pull, UI, and pub.dev snippets.
 
-## Monorepo development
+## Development
 
 ```bash
 dart pub get

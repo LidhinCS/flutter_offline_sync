@@ -1,6 +1,6 @@
 # Installation
 
-Packages are published from the [flutter_offline_sync](https://github.com/LidhinCS/flutter_offline_sync) monorepo.
+Packages are available from the [flutter_offline_sync](https://github.com/LidhinCS/flutter_offline_sync) repository.
 
 ## Git dependency (current)
 
@@ -40,7 +40,7 @@ dependencies:
 
 ## Codegen
 
-`offline_sync_core` and `offline_sync_pull` use Drift. After cloning the monorepo:
+`offline_sync_core` and `offline_sync_pull` use Drift. After cloning the repository:
 
 ```bash
 dart run melos run build_runner

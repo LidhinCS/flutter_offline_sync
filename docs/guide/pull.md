@@ -10,33 +10,33 @@ import 'package:offline_sync_pull_flutter/offline_sync_pull_flutter.dart';
 final registry = PullFeatureRegistry()
   ..register(
     PullFeature(
-      name: 'documents',
+      name: 'posts',
       steps: [
         PaginatedListPullStep(
           key: 'list',
           pageSize: 20,
-          handler: DocumentListPullHandler(dio, documentLocal),
+          handler: PostListPullHandler(dio, postLocal),
         ),
       ],
     ),
   )
   ..register(
     PullFeature(
-      name: 'workflow',
+      name: 'products',
       maxPagesPerRun: 1,
       maxBatchesPerRun: 2,
       steps: [
         PaginatedListPullStep(
           key: 'list',
           pageSize: 20,
-          handler: WorkflowListPullHandler(dio, workflowLocal),
+          handler: ProductListPullHandler(dio, productLocal),
         ),
         EntityBatchPullStep(
           key: 'detail',
           dependsOn: ['list'],
           batchSize: 10,
-          idSelector: workflowLocal.idsMissingDetail,
-          handler: WorkflowDetailPullHandler(dio, workflowLocal),
+          idSelector: productLocal.idsMissingDetail,
+          handler: ProductDetailPullHandler(dio, productLocal),
         ),
       ],
     ),
@@ -47,7 +47,7 @@ final coordinator = PullCoordinator(
   registry: registry,
 );
 
-await coordinator.runFeature('documents');
+await coordinator.runFeature('posts');
 await coordinator.runAll();
 ```
 

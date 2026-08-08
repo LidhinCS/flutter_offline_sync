@@ -1,7 +1,7 @@
 # Documentation site plan — offline_sync
 
 Plan for a public docs site before publishing packages to pub.dev (and/or Git
-as a monorepo). Target quality: similar to [Bloc](https://bloclibrary.dev),
+as a package suite). Target quality: similar to [Bloc](https://bloclibrary.dev),
 [Drift](https://drift.simonbinder.eu), or [Mason](https://docs.brickhub.dev) —
 conceptual overview, integration guides, and API reference links.
 
@@ -13,7 +13,7 @@ conceptual overview, integration guides, and API reference links.
 |---|---|
 | Explain **what** offline_sync is in under 2 minutes | Landing page + architecture diagram |
 | Show **how push + pull** fit together | Dedicated architecture section |
-| Enable integration without reading the whole monorepo | Step-by-step guides per app profile |
+| Enable integration without reading the whole repository | Step-by-step guides per app profile |
 | Support **pub.dev** discovery | `homepage` + `documentation` URLs in every `pubspec.yaml` |
 | Reduce support questions | Troubleshooting + FAQ |
 | Look credible for adoption | Polished UI, search, mobile-friendly, changelog |
@@ -21,7 +21,7 @@ conceptual overview, integration guides, and API reference links.
 **Audience**
 
 - Flutter developers adding offline-first to an existing app
-- Teams using Dio + Drift + clean architecture (EDMS-style)
+- Teams using Dio + Drift + clean architecture
 - Readers who may consume via **Git path deps** today, **pub.dev** later
 
 ---
@@ -98,7 +98,7 @@ Home | Guides | Packages | Examples | Advanced | Changelog | GitHub
 
 #### **Packages** (`/packages/`)
 
-One page per published package (not the monorepo root):
+One page per published package:
 
 | Package | Sections on page |
 |---|---|
@@ -129,7 +129,7 @@ Embed or link to `packages/*/example` with `flutter run` instructions.
 - Retry policy, conflict handling, idempotency keys
 - `maxPagesPerRun` / bounded pulls
 - Custom retry / `isOutputStillValid`
-- Melos monorepo for contributors
+- Melos scripts for contributors
 - Publishing / versioning policy
 
 #### **Changelog** (`/changelog`)
@@ -139,7 +139,7 @@ Embed or link to `packages/*/example` with `flutter run` instructions.
 
 #### **Contributing** (optional)
 
-- Link to monorepo README, Melos scripts, PR expectations
+- Link to root README, Melos scripts, PR expectations
 
 ---
 
@@ -201,12 +201,12 @@ Before or alongside first publish:
 | Option | Pros |
 |---|---|
 | **5 separate pub.dev packages** | Matches imports today; clear deps |
-| **Monorepo Git only + docs** | Simpler until API stable |
+| **Git-only + docs** | Simpler until API stable |
 | **Hybrid** | Publish `core` + `flutter` first; pull/ui follow in 0.2 |
 
 Document on site which install path you recommend at each phase.
 
-**Git dependency snippet (current EDMS style)**
+**Git dependency snippet**
 
 ```yaml
 offline_sync_flutter:
@@ -281,7 +281,7 @@ jobs:
 ### Phase 4 — Polish (ongoing)
 
 - [ ] Search tuning, sidebar polish
-- [ ] Optional: EDMS case study (internal app patterns)
+- [ ] Optional: real-world integration case study
 - [ ] Optional: migration guides from other libs
 - [ ] Versioned docs when 1.0 approaches
 
@@ -299,7 +299,7 @@ jobs:
 | `packages/offline_sync_pull_flutter/README.md` | Package page |
 | `packages/offline_sync_ui/README.md` | Guide: UI, screenshots |
 | Root `README.md` | Contributor setup, Melos |
-| EDMS app patterns (external) | Guide: Clean architecture (optional) |
+| App integration patterns | Guide: Clean architecture (optional) |
 
 **Rule:** READMEs stay as quick reference; **site owns the learning path**. README links to `documentation` URL for depth.
 
@@ -325,7 +325,7 @@ jobs:
 2. **Custom domain** vs `lidhin.github.io/flutter_offline_sync`
 3. **Publish all 5 packages at 0.1.0** or stagger core/flutter first
 4. **Git `ref: main`** vs tagged releases for consumers (recommend tags)
-5. **Remove `resolution: workspace`** on published packages or document path-only monorepo consumption
+5. **Remove `resolution: workspace`** on published packages or document path-only Git consumption
 6. **Author / publisher** consistency (`publisher: lidhin.com` in pubspecs)
 
 ---

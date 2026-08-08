@@ -10,7 +10,7 @@ Each package includes a runnable Flutter example under `packages/<name>/example`
 | Pull Flutter | `packages/offline_sync_pull_flutter/example` | Connectivity + background pull |
 | UI | `packages/offline_sync_ui/example` | Badges, banners, list tiles |
 
-## Run from monorepo root
+## Run from the repository root
 
 ```bash
 dart pub get

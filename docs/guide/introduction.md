@@ -1,6 +1,6 @@
 # Introduction
 
-**offline_sync** is a monorepo of Dart/Flutter packages for **offline-first** apps that need reliable writes when offline and structured pulls when back online — without folding everything into one generic “sync engine.”
+**offline_sync** is a set of Dart/Flutter packages for **offline-first** apps that need reliable writes when offline and structured pulls when back online — without folding everything into one generic “sync engine.”
 
 ## The problem
 
@@ -21,7 +21,7 @@ A flat outbox table handles simple POST retries but cannot express **“run B on
 
 **You still own:**
 
-- Your **AppDatabase** (Drift) — documents, workflows, UI read model
+- Your **AppDatabase** (Drift) — entities, lists, and the UI read model
 - **Dio** clients and API shapes
 - **Handlers** — HTTP + upsert logic inside `SyncTaskHandler` / `PullStepHandler`
 
@@ -33,7 +33,7 @@ Good fit:
 
 - Dio + Drift (or similar) apps with offline writes and paginated sync
 - Multi-step API flows (upload → create, parent job → child job)
-- EDMS-style list + detail pulls with checkpoints
+- List + detail pulls with checkpoints and resume support
 
 Not a fit:
 

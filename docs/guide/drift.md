@@ -4,7 +4,7 @@
 
 | DB | What goes here |
 | --- | --- |
-| **AppDatabase** | Your entities — documents, workflows, users |
+| **AppDatabase** | Your entities — posts, products, users, … |
 | **SyncDatabase** | Jobs and steps (package) |
 | **PullDatabase** | Checkpoints (package) |
 
@@ -19,7 +19,7 @@ Handlers are the bridge: package calls **your** handler → handler upserts **Ap
 ```dart
 LazyDatabase openAppConnection() {
   return LazyDatabase(() async {
-    final file = File(p.join(dir.path, 'edms_app.sqlite'));
+    final file = File(p.join(dir.path, 'app.sqlite'));
     return NativeDatabase.createInBackground(
       file,
       setup: (raw) {
@@ -55,4 +55,4 @@ After schema changes:
 dart run build_runner build --delete-conflicting-outputs
 ```
 
-In the monorepo: `dart run melos run build_runner`.
+From the repository root: `dart run melos run build_runner`.

@@ -1,6 +1,6 @@
 # offline_sync documentation
 
-VitePress site for the offline_sync monorepo.
+VitePress site for the offline_sync packages.
 
 ## Local development
 
@@ -34,5 +34,4 @@ Site URL (default): `https://lidhin.github.io/flutter_offline_sync/`
 | `guide/` | Integration guides |
 | `packages/` | Per-package overview |
 | `examples/` | Example apps |
-| `advanced/` | Publishing, contributing |
-| `contributing/` | Internal planning docs |
+| `advanced/` | Publishing and contributor notes |

@@ -10,9 +10,9 @@ Deeper topics beyond the integration guides.
 - Bounded pull runs (`maxPagesPerRun`) — [Pull](/guide/pull)
 - WAL and multi-isolate DB access — [Foreground & background](/guide/foreground-background)
 
-## Monorepo development
+## Local development
 
-Clone the repo and use Melos scripts from the root `pubspec.yaml`:
+Clone the repository and use Melos scripts from the root `pubspec.yaml`:
 
 ```bash
 dart pub get
@@ -30,7 +30,3 @@ dart run melos run build_runner
 ## Publishing
 
 See [Publishing](/advanced/publishing).
-
-## Site plan
-
-Internal planning doc: [website-plan](/contributing/website-plan).

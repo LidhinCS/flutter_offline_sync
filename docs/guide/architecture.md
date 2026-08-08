@@ -47,7 +47,7 @@ Never merge these in documentation or mental model:
 
 | Database | File (default) | Owner | Stores |
 | --- | --- | --- | --- |
-| **AppDatabase** | `edms_app.sqlite` (your name) | **Your app** | Documents, workflows, folders, … |
+| **AppDatabase** | `app.sqlite` (your choice) | **Your app** | Documents, orders, settings, … |
 | **SyncDatabase** | `sync_core.sqlite` | `offline_sync_core` | Outbox jobs and steps |
 | **PullDatabase** | `offline_sync_pull.sqlite` | `offline_sync_pull` | Pull checkpoints only |
 

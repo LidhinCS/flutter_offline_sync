@@ -32,7 +32,7 @@ issue_tracker: https://github.com/LidhinCS/flutter_offline_sync/issues
 
 ## Workspace resolution
 
-Monorepo packages use `resolution: workspace`. Published packages may need path deps replaced with pub.dev version constraints for external consumers.
+Development packages may use `resolution: workspace`. Published packages should expose normal pub.dev version constraints for consumers.
 
 ## Docs site
 

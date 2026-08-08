@@ -11,7 +11,7 @@ lib/
     di/                # SyncModule, PullModule, DatabaseModule
     background/        # Workmanager entrypoints
   features/
-    documents/
+    <feature>/
       data/
         tables/        # Drift Table
         daos/          # @DriftAccessor
@@ -48,13 +48,13 @@ await getIt<PullCoordinator>().runAll();
 
 Keep this in bootstrap or a dedicated `AppSyncService`, not inside every screen.
 
-## EDMS-style mapping
+## Example mapping
 
 | Concern | Where |
 | --- | --- |
-| Document list UI | `features/documents/presentation` |
-| Document rows | AppDatabase + DAO |
-| List pull handler | `DocumentListPullHandler` → local DS |
+| Feature list UI | `features/<name>/presentation` |
+| Feature rows | AppDatabase + DAO |
+| List pull handler | Feature `PullStepHandler` → local datasource |
 | Write enqueue | Repository → `JobBuilder` |
 | Checkpoints | `PullDatabase` (package) |
 

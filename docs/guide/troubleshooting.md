@@ -35,9 +35,9 @@
 
 Handlers must upsert into **AppDatabase**. Checkpoint only tracks pull progress.
 
-## `resolution: workspace` in monorepo packages
+## `resolution: workspace` in package pubspecs
 
-External apps consuming via Git `path:` should not use workspace resolution. Published pub.dev packages will use normal path/version deps.
+Apps consuming via Git `path:` should not rely on workspace resolution. Published pub.dev packages will use normal version constraints.
 
 ## Handler not found
 

@@ -4,7 +4,7 @@ Aggregated release notes. Per-package changelogs will live in `packages/*/CHANGE
 
 ## Unreleased
 
-### Monorepo
+### Project
 
 - Five packages: core, flutter, pull, pull_flutter, ui
 - Melos scripts: analyze, test, build_runner, ci
