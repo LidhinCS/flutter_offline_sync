@@ -4,6 +4,8 @@ Offline-first sync for Flutter/Dart: **push** write queue, **pull** coordinator,
 
 📖 **[Documentation](https://lidhin.github.io/flutter_offline_sync/)** · [GitHub](https://github.com/LidhinCS/flutter_offline_sync)
 
+[![Buy Me A Coffee](https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&slug=lidhincs&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff)](https://buymeacoffee.com/lidhincs)
+
 ## Packages
 
 | Package | Role |

@@ -12,9 +12,6 @@ hero:
     - theme: alt
       text: View on GitHub
       link: https://github.com/LidhinCS/flutter_offline_sync
-    - theme: alt
-      text: Buy me a coffee
-      link: https://buymeacoffee.com/lidhincs
 
 features:
   - title: Push queue
@@ -44,3 +41,12 @@ features:
 - **Full stack** — both adapters + optional `offline_sync_ui` for job status UI.
 
 See [Installation](/guide/installation) for `pubspec` snippets (Git and pub.dev).
+
+<p style="text-align: center; margin-top: 2.5rem;">
+  <a href="https://buymeacoffee.com/lidhincs" target="_blank" rel="noreferrer">
+    <img
+      src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&slug=lidhincs&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff"
+      alt="Buy me a coffee"
+    />
+  </a>
+</p>
