@@ -1,7 +1,7 @@
 # flutter_offline_sync_pull
 
 [![pub package](https://img.shields.io/pub/v/flutter_offline_sync_pull.svg)](https://pub.dev/packages/flutter_offline_sync_pull)
-[![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/LidhinCS/flutter_offline_sync/blob/main/packages/flutter_offline_sync_pull/LICENSE)
 
 Pull coordinator for offline-first Flutter/Dart apps. Complements
 [flutter_offline_sync_core](https://pub.dev/packages/flutter_offline_sync_core) on the **read** side: paginated list

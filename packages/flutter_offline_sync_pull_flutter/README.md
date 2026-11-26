@@ -1,7 +1,7 @@
 # flutter_offline_sync_pull_flutter
 
 [![pub package](https://img.shields.io/pub/v/flutter_offline_sync_pull_flutter.svg)](https://pub.dev/packages/flutter_offline_sync_pull_flutter)
-[![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/LidhinCS/flutter_offline_sync/blob/main/packages/flutter_offline_sync_pull_flutter/LICENSE)
 
 Flutter adapters for [flutter_offline_sync_pull](https://pub.dev/packages/flutter_offline_sync_pull): Workmanager
 background pull and connectivity-triggered foreground pull.

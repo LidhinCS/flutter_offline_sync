@@ -1,7 +1,7 @@
 # flutter_offline_sync_ui
 
 [![pub package](https://img.shields.io/pub/v/flutter_offline_sync_ui.svg)](https://pub.dev/packages/flutter_offline_sync_ui)
-[![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/LidhinCS/flutter_offline_sync/blob/main/packages/flutter_offline_sync_ui/LICENSE)
 
 Flutter UI widgets for [flutter_offline_sync_core](https://pub.dev/packages/flutter_offline_sync_core). Watches Drift
 job streams and shows sync status per screen or feature.

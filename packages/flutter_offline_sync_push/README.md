@@ -1,7 +1,7 @@
 # flutter_offline_sync_push
 
 [![pub package](https://img.shields.io/pub/v/flutter_offline_sync_push.svg)](https://pub.dev/packages/flutter_offline_sync_push)
-[![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/LidhinCS/flutter_offline_sync/blob/main/packages/flutter_offline_sync_push/LICENSE)
 
 Flutter adapters for [flutter_offline_sync_core](https://pub.dev/packages/flutter_offline_sync_core): Workmanager
 background sync, connectivity-triggered foreground sync, and startup recovery.

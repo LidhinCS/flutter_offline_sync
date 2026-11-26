@@ -1,7 +1,7 @@
 # flutter_offline_sync_core
 
 [![pub package](https://img.shields.io/pub/v/flutter_offline_sync_core.svg)](https://pub.dev/packages/flutter_offline_sync_core)
-[![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/LidhinCS/flutter_offline_sync/blob/main/packages/flutter_offline_sync_core/LICENSE)
 
 Offline-first sync engine for Flutter/Dart. Models every offline write as a
 **Job** (one user action) made of one or more **Steps** (individual API
