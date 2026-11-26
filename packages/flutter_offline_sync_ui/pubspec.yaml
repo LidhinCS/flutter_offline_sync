@@ -1,0 +1,33 @@
+name: flutter_offline_sync_ui
+description: >
+  Flutter UI widgets for flutter_offline_sync_core: job status badges, activity
+  indicators, screen banners, and list tiles wired to Drift watch streams.
+version: 0.1.0
+resolution: workspace
+
+homepage: https://lidhin.github.io/flutter_offline_sync/
+repository: https://github.com/LidhinCS/flutter_offline_sync
+issue_tracker: https://github.com/LidhinCS/flutter_offline_sync/issues
+documentation: https://lidhin.github.io/flutter_offline_sync/guide/ui
+
+topics:
+  - offline
+  - sync
+  - flutter
+  - widgets
+  - ui
+
+environment:
+  sdk: ^3.12.2
+  flutter: ">=3.16.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_offline_sync_core: ^0.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  drift: ^2.34.0
+  flutter_lints: ^6.0.0

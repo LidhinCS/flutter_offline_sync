@@ -1,0 +1,28 @@
+name: flutter_offline_sync_push_example
+description: Example app demonstrating flutter_offline_sync_push adapters.
+publish_to: none
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  flutter_offline_sync_push:
+    path: ../
+  workmanager: ^0.10.1+2
+
+# Until flutter_offline_sync_core is on pub.dev, force the sibling path.
+dependency_overrides:
+  flutter_offline_sync_core:
+    path: ../../flutter_offline_sync_core
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true

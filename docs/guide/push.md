@@ -5,7 +5,7 @@ The push path queues **offline writes** as jobs and steps, then runs them throug
 ## Quick start
 
 ```dart
-import 'package:offline_sync_flutter/offline_sync_flutter.dart';
+import 'package:flutter_offline_sync_push/flutter_offline_sync_push.dart';
 
 final registry = SyncHandlerRegistry()
   ..register('uploadImage', UploadImageHandler(dio))
@@ -65,7 +65,7 @@ Enqueue via `JobBuilder` into `SyncDatabase`. Optionally upsert into **AppDataba
 
 ## Flutter adapter
 
-Use [offline_sync_flutter](/packages/offline_sync_flutter) for:
+Use [flutter_offline_sync_push](/packages/flutter_offline_sync_push) for:
 
 - `FlutterSyncCoordinator` — connectivity + startup recovery
 - `runBackgroundSync` + Workmanager
@@ -74,4 +74,4 @@ See [Foreground & background](/guide/foreground-background).
 
 ## Package reference
 
-[offline_sync_core](/packages/offline_sync_core) · [offline_sync_flutter](/packages/offline_sync_flutter)
+[flutter_offline_sync_core](/packages/flutter_offline_sync_core) · [flutter_offline_sync_push](/packages/flutter_offline_sync_push)

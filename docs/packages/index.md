@@ -4,18 +4,19 @@ Five packages — pick adapters for Flutter apps; use core packages alone for Da
 
 | Package | Dart/Flutter | Role |
 | --- | --- | --- |
-| [offline_sync_core](/packages/offline_sync_core) | Dart | Push engine |
-| [offline_sync_flutter](/packages/offline_sync_flutter) | Flutter | Push + re-exports core |
-| [offline_sync_pull](/packages/offline_sync_pull) | Dart | Pull coordinator |
-| [offline_sync_pull_flutter](/packages/offline_sync_pull_flutter) | Flutter | Pull + re-exports pull |
-| [offline_sync_ui](/packages/offline_sync_ui) | Flutter | Job status widgets |
+| [flutter_offline_sync_core](/packages/flutter_offline_sync_core) | Dart | Push engine |
+| [flutter_offline_sync_push](/packages/flutter_offline_sync_push) | Flutter | Push + re-exports core |
+| [flutter_offline_sync_pull](/packages/flutter_offline_sync_pull) | Dart | Pull coordinator |
+| [flutter_offline_sync_pull_flutter](/packages/flutter_offline_sync_pull_flutter) | Flutter | Pull + re-exports pull |
+| [flutter_offline_sync_ui](/packages/flutter_offline_sync_ui) | Flutter | Job status widgets |
 
 Typical app dependencies:
 
 ```yaml
-offline_sync_flutter: ...
-offline_sync_pull_flutter: ...
-offline_sync_ui: ... # optional
+dependencies:
+  flutter_offline_sync_push: ^0.1.0
+  flutter_offline_sync_pull_flutter: ^0.1.0
+  flutter_offline_sync_ui: ^0.1.0 # optional
 ```
 
-See [Installation](/guide/installation) for full `pubspec` blocks.
+See [Installation](/guide/installation) for Git alternatives and package choice.

@@ -15,9 +15,9 @@ A flat outbox table handles simple POST retries but cannot express **“run B on
 
 | Layer | Packages | Responsibility |
 | --- | --- | --- |
-| Push | `offline_sync_core`, `offline_sync_flutter` | Job/step queue, handlers, `SyncEngine`, Workmanager |
-| Pull | `offline_sync_pull`, `offline_sync_pull_flutter` | Features, steps, checkpoints, `PullCoordinator` |
-| UI | `offline_sync_ui` | Job status badges and banners (optional) |
+| Push | `flutter_offline_sync_core`, `flutter_offline_sync_push` | Job/step queue, handlers, `SyncEngine`, Workmanager |
+| Pull | `flutter_offline_sync_pull`, `flutter_offline_sync_pull_flutter` | Features, steps, checkpoints, `PullCoordinator` |
+| UI | `flutter_offline_sync_ui` | Job status badges and banners (optional) |
 
 **You still own:**
 

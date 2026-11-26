@@ -28,16 +28,16 @@ features:
 
 | Package | Role |
 | --- | --- |
-| [offline_sync_core](/packages/offline_sync_core) | Write queue — `SyncEngine`, jobs/steps, Drift outbox |
-| [offline_sync_flutter](/packages/offline_sync_flutter) | Workmanager + connectivity for push |
-| [offline_sync_pull](/packages/offline_sync_pull) | Pull coordinator — lists, batches, checkpoints |
-| [offline_sync_pull_flutter](/packages/offline_sync_pull_flutter) | Workmanager + connectivity for pull |
-| [offline_sync_ui](/packages/offline_sync_ui) | Sync status widgets |
+| [flutter_offline_sync_core](/packages/flutter_offline_sync_core) | Write queue — `SyncEngine`, jobs/steps, Drift outbox |
+| [flutter_offline_sync_push](/packages/flutter_offline_sync_push) | Workmanager + connectivity for push |
+| [flutter_offline_sync_pull](/packages/flutter_offline_sync_pull) | Pull coordinator — lists, batches, checkpoints |
+| [flutter_offline_sync_pull_flutter](/packages/flutter_offline_sync_pull_flutter) | Workmanager + connectivity for pull |
+| [flutter_offline_sync_ui](/packages/flutter_offline_sync_ui) | Sync status widgets |
 
 ## Choose your path
 
-- **Push only** — add `offline_sync_flutter` for offline writes and background sync.
-- **Pull only** — add `offline_sync_pull_flutter` for server-to-device ingest.
-- **Full stack** — both adapters + optional `offline_sync_ui` for job status UI.
+- **Push only** — add `flutter_offline_sync_push` for offline writes and background sync.
+- **Pull only** — add `flutter_offline_sync_pull_flutter` for server-to-device ingest.
+- **Full stack** — both adapters + optional `flutter_offline_sync_ui` for job status UI.
 
 See [Installation](/guide/installation) for `pubspec` snippets (Git and pub.dev).

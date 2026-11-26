@@ -5,7 +5,7 @@ The pull path **ingests server data** into your App DB using paginated lists and
 ## Quick start
 
 ```dart
-import 'package:offline_sync_pull_flutter/offline_sync_pull_flutter.dart';
+import 'package:flutter_offline_sync_pull_flutter/flutter_offline_sync_pull_flutter.dart';
 
 final registry = PullFeatureRegistry()
   ..register(
@@ -70,8 +70,8 @@ Handlers call your API and **upsert into AppDatabase** via local datasources —
 
 ## Flutter adapter
 
-[offline_sync_pull_flutter](/packages/offline_sync_pull_flutter) adds `FlutterPullCoordinator` and `runBackgroundPull`.
+[flutter_offline_sync_pull_flutter](/packages/flutter_offline_sync_pull_flutter) adds `FlutterPullCoordinator` and `runBackgroundPull`.
 
 ## Package reference
 
-[offline_sync_pull](/packages/offline_sync_pull) · [offline_sync_pull_flutter](/packages/offline_sync_pull_flutter)
+[flutter_offline_sync_pull](/packages/flutter_offline_sync_pull) · [flutter_offline_sync_pull_flutter](/packages/flutter_offline_sync_pull_flutter)

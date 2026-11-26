@@ -48,8 +48,8 @@ Never merge these in documentation or mental model:
 | Database | File (default) | Owner | Stores |
 | --- | --- | --- | --- |
 | **AppDatabase** | `app.sqlite` (your choice) | **Your app** | Documents, orders, settings, … |
-| **SyncDatabase** | `sync_core.sqlite` | `offline_sync_core` | Outbox jobs and steps |
-| **PullDatabase** | `offline_sync_pull.sqlite` | `offline_sync_pull` | Pull checkpoints only |
+| **SyncDatabase** | `sync_core.sqlite` | `flutter_offline_sync_core` | Outbox jobs and steps |
+| **PullDatabase** | `flutter_offline_sync_pull.sqlite` | `flutter_offline_sync_pull` | Pull checkpoints only |
 
 Packages **never** open your `AppDatabase`. Handlers you write call your DAOs/local datasources.
 

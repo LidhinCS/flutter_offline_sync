@@ -21,9 +21,9 @@
     },
     "linking_enabled": false
   },
-  "out_dir_shared": "/Users/lidhin/Documents/Work/Bluecast/frontEnd/package/flutter_offline_sync/.dart_tool/hooks_runner/shared/objective_c/build/",
-  "out_file": "/Users/lidhin/Documents/Work/Bluecast/frontEnd/package/flutter_offline_sync/.dart_tool/hooks_runner/objective_c/7ad245dadc/output.json",
+  "out_dir_shared": "/Volumes/lidhinSSD/MacBackup/Documents/projects/frontend/personal/flutter_offline_sync/.dart_tool/hooks_runner/shared/objective_c/build/",
+  "out_file": "/Volumes/lidhinSSD/MacBackup/Documents/projects/frontend/personal/flutter_offline_sync/.dart_tool/hooks_runner/objective_c/7ad245dadc/output.json",
   "package_name": "objective_c",
-  "package_root": "/Users/lidhin/.pub-cache/hosted/pub.dev/objective_c-9.5.0/",
+  "package_root": "/Users/Apple/.pub-cache/hosted/pub.dev/objective_c-9.6.4/",
   "user_defines": {}
 }

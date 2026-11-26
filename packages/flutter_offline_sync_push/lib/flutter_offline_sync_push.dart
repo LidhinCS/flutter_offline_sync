@@ -1,0 +1,7 @@
+library;
+
+export 'package:flutter_offline_sync_core/flutter_offline_sync_core.dart';
+
+export 'src/background_sync.dart';
+export 'src/connectivity_sync_trigger.dart';
+export 'src/flutter_sync_coordinator.dart';

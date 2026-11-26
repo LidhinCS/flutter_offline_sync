@@ -6,7 +6,7 @@ Deeper topics beyond the integration guides.
 
 - Partial retry and `isOutputStillValid` — [Push](/guide/push)
 - Conflict resolution — [Push](/guide/push)
-- Cross-job dependencies — package README in `offline_sync_core`
+- Cross-job dependencies — package README in `flutter_offline_sync_core`
 - Bounded pull runs (`maxPagesPerRun`) — [Pull](/guide/pull)
 - WAL and multi-isolate DB access — [Foreground & background](/guide/foreground-background)
 

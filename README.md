@@ -2,31 +2,30 @@
 
 Offline-first sync for Flutter/Dart: **push** write queue, **pull** coordinator, Flutter adapters, and optional UI widgets.
 
-📖 **[Documentation](https://lidhin.github.io/flutter_offline_sync/)** · [GitHub](https://github.com/LidhinCS/flutter_offline_sync)
-
+📖 **[Documentation](https://lidhin.github.io/flutter_offline_sync/)** · [GitHub](https://github.com/LidhinCS/flutter_offline_sync) · [Changelog](https://lidhin.github.io/flutter_offline_sync/changelog)
 
 ## Packages
 
-| Package | Role |
-| --- | --- |
-| `offline_sync_core` | Write queue — jobs, steps, `SyncEngine` |
-| `offline_sync_flutter` | Workmanager + connectivity for push |
-| `offline_sync_pull` | Pull coordinator — lists, batches, checkpoints |
-| `offline_sync_pull_flutter` | Workmanager + connectivity for pull |
-| `offline_sync_ui` | Sync job status widgets |
+| Package | Role | pub.dev |
+| --- | --- | --- |
+| [`flutter_offline_sync_core`](packages/flutter_offline_sync_core) | Write queue — jobs, steps, `SyncEngine` | [![pub](https://img.shields.io/pub/v/flutter_offline_sync_core.svg)](https://pub.dev/packages/flutter_offline_sync_core) |
+| [`flutter_offline_sync_push`](packages/flutter_offline_sync_push) | Workmanager + connectivity for push | [![pub](https://img.shields.io/pub/v/flutter_offline_sync_push.svg)](https://pub.dev/packages/flutter_offline_sync_push) |
+| [`flutter_offline_sync_pull`](packages/flutter_offline_sync_pull) | Pull coordinator — lists, batches, checkpoints | [![pub](https://img.shields.io/pub/v/flutter_offline_sync_pull.svg)](https://pub.dev/packages/flutter_offline_sync_pull) |
+| [`flutter_offline_sync_pull_flutter`](packages/flutter_offline_sync_pull_flutter) | Workmanager + connectivity for pull | [![pub](https://img.shields.io/pub/v/flutter_offline_sync_pull_flutter.svg)](https://pub.dev/packages/flutter_offline_sync_pull_flutter) |
+| [`flutter_offline_sync_ui`](packages/flutter_offline_sync_ui) | Sync job status widgets | [![pub](https://img.shields.io/pub/v/flutter_offline_sync_ui.svg)](https://pub.dev/packages/flutter_offline_sync_ui) |
 
-## Quick install
+## Install
 
 ```yaml
 dependencies:
-  offline_sync_flutter:
-    git:
-      url: https://github.com/LidhinCS/flutter_offline_sync.git
-      ref: main
-      path: packages/offline_sync_flutter
+  flutter_offline_sync_push: ^0.1.0
+  flutter_offline_sync_pull_flutter: ^0.1.0
+  flutter_offline_sync_ui: ^0.1.0 # optional
 ```
 
-See the [installation guide](https://lidhin.github.io/flutter_offline_sync/guide/installation) for pull, UI, and pub.dev snippets.
+`flutter_offline_sync_push` and `flutter_offline_sync_pull_flutter` re-export their core packages.
+
+See the [installation guide](https://lidhin.github.io/flutter_offline_sync/guide/installation) for details.
 
 ## Development
 
@@ -45,11 +44,11 @@ cd docs && npm install && npm run dev
 ## Examples
 
 ```bash
-cd packages/offline_sync_core/example && flutter run
-cd packages/offline_sync_flutter/example && flutter run
-cd packages/offline_sync_pull/example && flutter run
-cd packages/offline_sync_pull_flutter/example && flutter run
-cd packages/offline_sync_ui/example && flutter run
+cd packages/flutter_offline_sync_core/example && flutter run
+cd packages/flutter_offline_sync_push/example && flutter run
+cd packages/flutter_offline_sync_pull/example && flutter run
+cd packages/flutter_offline_sync_pull_flutter/example && flutter run
+cd packages/flutter_offline_sync_ui/example && flutter run
 ```
 
 ## Codegen
@@ -57,3 +56,7 @@ cd packages/offline_sync_ui/example && flutter run
 ```bash
 dart run melos run build_runner
 ```
+
+## License
+
+MIT — see [LICENSE](LICENSE).

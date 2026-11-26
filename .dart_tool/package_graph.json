@@ -1,11 +1,11 @@
 {
   "roots": [
-    "offline_sync",
-    "offline_sync_core",
-    "offline_sync_flutter",
-    "offline_sync_pull",
-    "offline_sync_pull_flutter",
-    "offline_sync_ui"
+    "flutter_offline_sync_core",
+    "flutter_offline_sync_pull",
+    "flutter_offline_sync_pull_flutter",
+    "flutter_offline_sync_push",
+    "flutter_offline_sync_ui",
+    "offline_sync"
   ],
   "packages": [
     {
@@ -17,11 +17,11 @@
       ]
     },
     {
-      "name": "offline_sync_ui",
+      "name": "flutter_offline_sync_ui",
       "version": "0.1.0",
       "dependencies": [
         "flutter",
-        "offline_sync_core"
+        "flutter_offline_sync_core"
       ],
       "devDependencies": [
         "drift",
@@ -30,7 +30,7 @@
       ]
     },
     {
-      "name": "offline_sync_core",
+      "name": "flutter_offline_sync_core",
       "version": "0.1.0",
       "dependencies": [
         "drift",
@@ -49,7 +49,7 @@
       ]
     },
     {
-      "name": "offline_sync_pull",
+      "name": "flutter_offline_sync_pull",
       "version": "0.1.0",
       "dependencies": [
         "drift",
@@ -65,12 +65,12 @@
       ]
     },
     {
-      "name": "offline_sync_pull_flutter",
+      "name": "flutter_offline_sync_pull_flutter",
       "version": "0.1.0",
       "dependencies": [
         "connectivity_plus",
         "flutter",
-        "offline_sync_pull",
+        "flutter_offline_sync_pull",
         "workmanager"
       ],
       "devDependencies": [
@@ -80,12 +80,12 @@
       ]
     },
     {
-      "name": "offline_sync_flutter",
+      "name": "flutter_offline_sync_push",
       "version": "0.1.0",
       "dependencies": [
         "connectivity_plus",
         "flutter",
-        "offline_sync_core",
+        "flutter_offline_sync_core",
         "workmanager"
       ],
       "devDependencies": [
@@ -96,7 +96,7 @@
     },
     {
       "name": "melos",
-      "version": "7.8.1",
+      "version": "7.8.2",
       "dependencies": [
         "ansi_styles",
         "args",
@@ -133,7 +133,7 @@
     },
     {
       "name": "drift",
-      "version": "2.34.3",
+      "version": "2.35.4",
       "dependencies": [
         "async",
         "collection",
@@ -166,18 +166,19 @@
     },
     {
       "name": "workmanager",
-      "version": "0.10.1+2",
+      "version": "0.10.10",
       "dependencies": [
         "flutter",
         "workmanager_android",
         "workmanager_apple",
+        "workmanager_linux",
         "workmanager_platform_interface",
         "workmanager_web"
       ]
     },
     {
       "name": "connectivity_plus",
-      "version": "7.3.1",
+      "version": "7.3.2",
       "dependencies": [
         "collection",
         "connectivity_plus_platform_interface",
@@ -202,7 +203,7 @@
     },
     {
       "name": "test",
-      "version": "1.31.0",
+      "version": "1.31.1",
       "dependencies": [
         "analyzer",
         "async",
@@ -238,7 +239,7 @@
     },
     {
       "name": "drift_dev",
-      "version": "2.34.0",
+      "version": "2.35.3",
       "dependencies": [
         "analyzer",
         "args",
@@ -263,12 +264,13 @@
         "sqlparser",
         "stream_transform",
         "string_scanner",
-        "yaml"
+        "yaml",
+        "yaml_edit"
       ]
     },
     {
       "name": "build_runner",
-      "version": "2.15.1",
+      "version": "2.16.1",
       "dependencies": [
         "analyzer",
         "args",
@@ -321,7 +323,7 @@
     },
     {
       "name": "meta",
-      "version": "1.18.0",
+      "version": "1.19.0",
       "dependencies": []
     },
     {
@@ -341,7 +343,7 @@
     },
     {
       "name": "sqlite3",
-      "version": "3.5.0",
+      "version": "3.9.2",
       "dependencies": [
         "code_assets",
         "collection",
@@ -367,7 +369,7 @@
     },
     {
       "name": "yaml",
-      "version": "3.1.3",
+      "version": "3.1.4",
       "dependencies": [
         "collection",
         "source_span",
@@ -376,8 +378,9 @@
     },
     {
       "name": "xml",
-      "version": "7.0.1",
+      "version": "7.1.0",
       "dependencies": [
+        "args",
         "collection",
         "meta",
         "petitparser"
@@ -392,7 +395,7 @@
     },
     {
       "name": "pubspec_parse",
-      "version": "1.5.0",
+      "version": "1.7.0",
       "dependencies": [
         "checked_yaml",
         "collection",
@@ -413,7 +416,7 @@
     },
     {
       "name": "pub_semver",
-      "version": "2.2.0",
+      "version": "2.2.1",
       "dependencies": [
         "collection"
       ]
@@ -428,7 +431,7 @@
     },
     {
       "name": "pool",
-      "version": "1.5.2",
+      "version": "1.5.3",
       "dependencies": [
         "async",
         "stack_trace"
@@ -436,12 +439,14 @@
     },
     {
       "name": "platform",
-      "version": "3.1.6",
-      "dependencies": []
+      "version": "3.2.0",
+      "dependencies": [
+        "meta"
+      ]
     },
     {
       "name": "mustache_template",
-      "version": "2.0.5",
+      "version": "2.0.6",
       "dependencies": []
     },
     {
@@ -463,7 +468,7 @@
     },
     {
       "name": "glob",
-      "version": "2.1.3",
+      "version": "2.2.0",
       "dependencies": [
         "async",
         "collection",
@@ -492,15 +497,16 @@
     },
     {
       "name": "cli_util",
-      "version": "0.4.2",
+      "version": "0.5.2",
       "dependencies": [
+        "ffi",
         "meta",
         "path"
       ]
     },
     {
       "name": "cli_launcher",
-      "version": "0.3.3+2",
+      "version": "0.3.4+1",
       "dependencies": [
         "path",
         "yaml"
@@ -526,12 +532,12 @@
     },
     {
       "name": "web",
-      "version": "1.1.1",
+      "version": "1.1.2",
       "dependencies": []
     },
     {
       "name": "stack_trace",
-      "version": "1.12.1",
+      "version": "1.12.2",
       "dependencies": [
         "path"
       ]
@@ -563,12 +569,12 @@
     },
     {
       "name": "vector_math",
-      "version": "2.2.0",
+      "version": "2.4.4",
       "dependencies": []
     },
     {
       "name": "clock",
-      "version": "1.1.2",
+      "version": "1.1.3",
       "dependencies": []
     },
     {
@@ -581,7 +587,7 @@
     },
     {
       "name": "matcher",
-      "version": "0.12.19",
+      "version": "0.12.20",
       "dependencies": [
         "async",
         "meta",
@@ -592,7 +598,7 @@
     },
     {
       "name": "test_api",
-      "version": "0.7.11",
+      "version": "0.7.12",
       "dependencies": [
         "async",
         "boolean_selector",
@@ -606,8 +612,16 @@
       ]
     },
     {
-      "name": "workmanager_web",
+      "name": "workmanager_linux",
       "version": "0.1.1+1",
+      "dependencies": [
+        "flutter",
+        "workmanager_platform_interface"
+      ]
+    },
+    {
+      "name": "workmanager_web",
+      "version": "0.2.0",
       "dependencies": [
         "flutter",
         "flutter_web_plugins",
@@ -616,7 +630,7 @@
     },
     {
       "name": "workmanager_apple",
-      "version": "0.9.7",
+      "version": "0.9.11",
       "dependencies": [
         "flutter",
         "workmanager_platform_interface"
@@ -624,7 +638,7 @@
     },
     {
       "name": "workmanager_android",
-      "version": "0.10.1",
+      "version": "0.10.9",
       "dependencies": [
         "flutter",
         "workmanager_platform_interface"
@@ -632,7 +646,7 @@
     },
     {
       "name": "workmanager_platform_interface",
-      "version": "0.10.1",
+      "version": "0.10.5",
       "dependencies": [
         "flutter",
         "meta",
@@ -641,7 +655,7 @@
     },
     {
       "name": "nm",
-      "version": "0.5.0",
+      "version": "0.6.0",
       "dependencies": [
         "dbus"
       ]
@@ -706,7 +720,7 @@
     },
     {
       "name": "test_core",
-      "version": "0.6.17",
+      "version": "0.6.18",
       "dependencies": [
         "analyzer",
         "args",
@@ -751,7 +765,7 @@
     },
     {
       "name": "shelf_static",
-      "version": "1.1.3",
+      "version": "1.2.0",
       "dependencies": [
         "convert",
         "http_parser",
@@ -771,7 +785,7 @@
     },
     {
       "name": "shelf",
-      "version": "1.4.2",
+      "version": "1.4.3",
       "dependencies": [
         "async",
         "collection",
@@ -795,7 +809,7 @@
     },
     {
       "name": "io",
-      "version": "1.0.5",
+      "version": "1.1.0",
       "dependencies": [
         "meta",
         "path",
@@ -804,7 +818,7 @@
     },
     {
       "name": "http_multi_server",
-      "version": "3.2.2",
+      "version": "3.2.3",
       "dependencies": [
         "async"
       ]
@@ -836,7 +850,7 @@
     },
     {
       "name": "analyzer",
-      "version": "12.1.0",
+      "version": "13.3.0",
       "dependencies": [
         "_fe_analyzer_shared",
         "collection",
@@ -869,7 +883,7 @@
     },
     {
       "name": "dart_style",
-      "version": "3.1.8",
+      "version": "3.1.14",
       "dependencies": [
         "analyzer",
         "args",
@@ -883,7 +897,7 @@
     },
     {
       "name": "build_config",
-      "version": "1.3.2",
+      "version": "1.3.3",
       "dependencies": [
         "checked_yaml",
         "json_annotation",
@@ -893,7 +907,7 @@
     },
     {
       "name": "build",
-      "version": "4.0.7",
+      "version": "4.0.11",
       "dependencies": [
         "analyzer",
         "crypto",
@@ -905,7 +919,7 @@
     },
     {
       "name": "sqlparser",
-      "version": "0.44.5",
+      "version": "0.45.1",
       "dependencies": [
         "charcode",
         "collection",
@@ -920,7 +934,7 @@
     },
     {
       "name": "stream_transform",
-      "version": "2.1.1",
+      "version": "2.1.2",
       "dependencies": []
     },
     {
@@ -950,19 +964,17 @@
     },
     {
       "name": "mime",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "dependencies": []
     },
     {
       "name": "crypto",
-      "version": "3.0.7",
-      "dependencies": [
-        "typed_data"
-      ]
+      "version": "3.0.8",
+      "dependencies": []
     },
     {
       "name": "built_value",
-      "version": "8.12.6",
+      "version": "8.13.0",
       "dependencies": [
         "built_collection",
         "collection",
@@ -972,25 +984,28 @@
     },
     {
       "name": "built_collection",
-      "version": "5.1.1",
+      "version": "5.1.2",
       "dependencies": []
     },
     {
       "name": "build_daemon",
-      "version": "4.1.3",
+      "version": "4.1.7",
       "dependencies": [
         "built_collection",
         "built_value",
         "crypto",
         "http_multi_server",
         "logging",
+        "package_config",
         "path",
         "pool",
+        "pub_semver",
         "shelf",
         "shelf_web_socket",
         "stream_transform",
         "watcher",
-        "web_socket_channel"
+        "web_socket_channel",
+        "yaml"
       ]
     },
     {
@@ -1050,32 +1065,34 @@
     },
     {
       "name": "native_toolchain_c",
-      "version": "0.19.2",
+      "version": "0.19.6",
       "dependencies": [
         "code_assets",
+        "file",
         "glob",
         "hooks",
         "logging",
         "meta",
+        "process",
         "pub_semver"
       ]
     },
     {
       "name": "code_assets",
-      "version": "1.2.1",
+      "version": "2.2.0",
       "dependencies": [
         "collection",
-        "hooks"
+        "hooks",
+        "logging"
       ]
     },
     {
       "name": "hooks",
-      "version": "2.0.2",
+      "version": "2.2.0",
       "dependencies": [
         "collection",
         "crypto",
         "logging",
-        "meta",
         "pub_semver",
         "record_use",
         "yaml"
@@ -1088,7 +1105,7 @@
     },
     {
       "name": "petitparser",
-      "version": "7.0.2",
+      "version": "7.1.0",
       "dependencies": [
         "collection",
         "meta"
@@ -1105,7 +1122,7 @@
     },
     {
       "name": "process",
-      "version": "5.0.5",
+      "version": "5.0.6",
       "dependencies": [
         "file",
         "path",
@@ -1156,7 +1173,7 @@
     },
     {
       "name": "dbus",
-      "version": "0.7.13",
+      "version": "0.8.1",
       "dependencies": [
         "args",
         "ffi",
@@ -1173,12 +1190,12 @@
     },
     {
       "name": "vm_service",
-      "version": "15.2.0",
+      "version": "15.4.0",
       "dependencies": []
     },
     {
       "name": "source_maps",
-      "version": "0.10.13",
+      "version": "0.10.14",
       "dependencies": [
         "source_span"
       ]
@@ -1194,9 +1211,10 @@
     },
     {
       "name": "frontend_server_client",
-      "version": "4.0.0",
+      "version": "4.2.0",
       "dependencies": [
         "async",
+        "package_config",
         "path"
       ]
     },
@@ -1210,10 +1228,9 @@
     },
     {
       "name": "_fe_analyzer_shared",
-      "version": "99.0.0",
+      "version": "103.0.0",
       "dependencies": [
-        "meta",
-        "source_span"
+        "meta"
       ]
     },
     {
@@ -1226,7 +1243,7 @@
     },
     {
       "name": "objective_c",
-      "version": "9.5.0",
+      "version": "9.6.4",
       "dependencies": [
         "code_assets",
         "collection",
@@ -1239,7 +1256,7 @@
     },
     {
       "name": "jni_flutter",
-      "version": "1.0.2",
+      "version": "1.1.0",
       "dependencies": [
         "flutter",
         "jni"
@@ -1247,7 +1264,7 @@
     },
     {
       "name": "jni",
-      "version": "1.0.3",
+      "version": "1.2.1",
       "dependencies": [
         "args",
         "collection",
@@ -1261,7 +1278,7 @@
     },
     {
       "name": "record_use",
-      "version": "0.6.0",
+      "version": "1.1.1",
       "dependencies": [
         "collection",
         "meta",

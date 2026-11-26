@@ -74,9 +74,9 @@ Home | Guides | Packages | Examples | Advanced | Changelog | GitHub
 - Problem statement (flat outbox vs job DAG, read vs write split)
 - Package matrix (5 packages, one-line role, install snippet)
 - “Choose your path” cards:
-  - Push only → `offline_sync_flutter`
-  - Pull only → `offline_sync_pull_flutter`
-  - Full stack → both + optional `offline_sync_ui`
+  - Push only → `flutter_offline_sync_push`
+  - Pull only → `flutter_offline_sync_pull_flutter`
+  - Full stack → both + optional `flutter_offline_sync_ui`
 - Link to live examples / repo example apps
 - Badges: pub.dev versions (when published), CI, license
 
@@ -87,13 +87,13 @@ Home | Guides | Packages | Examples | Advanced | Changelog | GitHub
 | **Introduction** | Why offline_sync exists; comparison to “just use Drift” |
 | **Core concepts** | Job, Step, Handler, Feature, Checkpoint, Coordinator |
 | **Architecture** | Three DBs diagram: App DB vs Sync DB vs Pull DB |
-| **Push (write path)** | From `offline_sync_core` README |
-| **Pull (read path)** | From `offline_sync_pull` README |
+| **Push (write path)** | From `flutter_offline_sync_core` README |
+| **Pull (read path)** | From `flutter_offline_sync_pull` README |
 | **Foreground + background** | Workmanager, connectivity, isolate rules |
 | **Clean architecture** | Feature folders, handlers, repositories, DI |
 | **Drift coexistence** | AppDatabase + package DBs, WAL, handlers upsert |
 | **Authentication** | Secure storage, foreground vs background Dio |
-| **UI widgets** | `offline_sync_ui` scope, badge, banner |
+| **UI widgets** | `flutter_offline_sync_ui` scope, badge, banner |
 | **Troubleshooting** | drift multi-db warnings, `getIt` in background, iOS Keychain |
 
 #### **Packages** (`/packages/`)
@@ -102,11 +102,11 @@ One page per published package:
 
 | Package | Sections on page |
 |---|---|
-| `offline_sync_core` | Install, when to use alone, API overview, link to dartdoc |
-| `offline_sync_flutter` | Install, Workmanager setup, exports |
-| `offline_sync_pull` | Install, step types, checkpoints |
-| `offline_sync_pull_flutter` | Install, mirror of flutter adapter |
-| `offline_sync_ui` | Widget catalog, screenshots |
+| `flutter_offline_sync_core` | Install, when to use alone, API overview, link to dartdoc |
+| `flutter_offline_sync_push` | Install, Workmanager setup, exports |
+| `flutter_offline_sync_pull` | Install, step types, checkpoints |
+| `flutter_offline_sync_pull_flutter` | Install, mirror of flutter adapter |
+| `flutter_offline_sync_ui` | Widget catalog, screenshots |
 
 Each page: `pubspec` dependency snippet (pub.dev + Git path fallback), minimal quick start, link to full guide.
 
@@ -168,7 +168,7 @@ Reuse heavily from existing package READMEs; site adds **narrative flow** and **
   - Write path: UI → enqueue → SyncEngine → handler → API → App DB
   - Read path: Coordinator → checkpoint → handler → API → App DB
   - Full reconnect: `syncAll()` then `runAll()`
-- **Screenshots:** 2–3 from `offline_sync_ui` example and pull demo
+- **Screenshots:** 2–3 from `flutter_offline_sync_ui` example and pull demo
 - **Package cards:** icon + install one-liner on home
 
 Reference sites for tone/structure:
@@ -209,17 +209,17 @@ Document on site which install path you recommend at each phase.
 **Git dependency snippet**
 
 ```yaml
-offline_sync_flutter:
+flutter_offline_sync_push:
   git:
     url: https://github.com/LidhinCS/flutter_offline_sync.git
     ref: v0.1.0   # tag, not moving main
-    path: packages/offline_sync_flutter
+    path: packages/flutter_offline_sync_push
 ```
 
 **pub.dev snippet (after publish)**
 
 ```yaml
-offline_sync_flutter: ^0.1.0
+flutter_offline_sync_push: ^0.1.0
 ```
 
 ---
@@ -293,11 +293,11 @@ jobs:
 
 | Existing asset | Site section |
 |---|---|
-| `packages/offline_sync_core/README.md` | Guide: Push, Advanced: retry/conflict |
-| `packages/offline_sync_flutter/README.md` | Guide: Background, Package page |
-| `packages/offline_sync_pull/README.md` | Guide: Pull, entity batch |
-| `packages/offline_sync_pull_flutter/README.md` | Package page |
-| `packages/offline_sync_ui/README.md` | Guide: UI, screenshots |
+| `packages/flutter_offline_sync_core/README.md` | Guide: Push, Advanced: retry/conflict |
+| `packages/flutter_offline_sync_push/README.md` | Guide: Background, Package page |
+| `packages/flutter_offline_sync_pull/README.md` | Guide: Pull, entity batch |
+| `packages/flutter_offline_sync_pull_flutter/README.md` | Package page |
+| `packages/flutter_offline_sync_ui/README.md` | Guide: UI, screenshots |
 | Root `README.md` | Contributor setup, Melos |
 | App integration patterns | Guide: Clean architecture (optional) |
 
@@ -321,7 +321,7 @@ jobs:
 
 ## 11. Open decisions (resolve before build)
 
-1. **Public name:** `offline_sync` vs `offline_sync_flutter` as marketing name → recommend **offline_sync** umbrella
+1. **Public name:** `offline_sync` vs `flutter_offline_sync_push` as marketing name → recommend **offline_sync** umbrella
 2. **Custom domain** vs `lidhin.github.io/flutter_offline_sync`
 3. **Publish all 5 packages at 0.1.0** or stagger core/flutter first
 4. **Git `ref: main`** vs tagged releases for consumers (recommend tags)

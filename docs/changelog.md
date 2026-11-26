@@ -1,34 +1,22 @@
 # Changelog
 
-Aggregated release notes. Per-package changelogs will live in `packages/*/CHANGELOG.md` when publishing starts.
+Aggregated release notes for **0.1.0**. Per-package details live in each package’s `CHANGELOG.md` on [pub.dev](https://pub.dev).
 
-## Unreleased
+## 0.1.0 — 2025-11-27
 
-### Project
+First public release of the offline_sync suite.
 
-- Five packages: core, flutter, pull, pull_flutter, ui
-- Melos scripts: analyze, test, build_runner, ci
-- Documentation site (VitePress)
+| Package | Version | pub.dev |
+| --- | --- | --- |
+| `flutter_offline_sync_core` | 0.1.0 | [flutter_offline_sync_core](https://pub.dev/packages/flutter_offline_sync_core) |
+| `flutter_offline_sync_push` | 0.1.0 | [flutter_offline_sync_push](https://pub.dev/packages/flutter_offline_sync_push) |
+| `flutter_offline_sync_pull` | 0.1.0 | [flutter_offline_sync_pull](https://pub.dev/packages/flutter_offline_sync_pull) |
+| `flutter_offline_sync_pull_flutter` | 0.1.0 | [flutter_offline_sync_pull_flutter](https://pub.dev/packages/flutter_offline_sync_pull_flutter) |
+| `flutter_offline_sync_ui` | 0.1.0 | [flutter_offline_sync_ui](https://pub.dev/packages/flutter_offline_sync_ui) |
 
-### offline_sync_core
+### Highlights
 
-- Job/step write queue with `SyncEngine`
-- Partial retry, conflict handling, cross-job dependencies
-
-### offline_sync_pull
-
-- `PullCoordinator` with paginated and entity-batch steps
-- Drift checkpoint database
-
-### offline_sync_flutter / offline_sync_pull_flutter
-
-- Workmanager background sync
-- Connectivity-triggered foreground coordinators
-
-### offline_sync_ui
-
-- Scope, badge, banner, list tile widgets
-
----
-
-When versions are published, this page will link to pub.dev changelogs.
+- **Push**: Job/Step DAG write queue, partial retry, conflicts, auto-retry of retryable failures, `isSyncingStream`
+- **Pull**: Paginated + entity-batch steps, checkpoints, `maxPagesPerRun`, `isPullingStream`
+- **Flutter adapters**: Workmanager + connectivity coordinators for push and pull
+- **UI**: Badges, banners, list tiles, `SyncActivityIndicator`, history helpers + `pruneCompletedJobs`

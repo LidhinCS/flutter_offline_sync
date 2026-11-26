@@ -6,37 +6,49 @@ Guidelines for publishing packages to pub.dev.
 
 | Package | Typical consumer |
 | --- | --- |
-| `offline_sync_core` | Advanced / tests |
-| `offline_sync_flutter` | Flutter apps (push) |
-| `offline_sync_pull` | Advanced / tests |
-| `offline_sync_pull_flutter` | Flutter apps (pull) |
-| `offline_sync_ui` | Optional UI |
+| `flutter_offline_sync_core` | Advanced / tests |
+| `flutter_offline_sync_push` | Flutter apps (push) |
+| `flutter_offline_sync_pull` | Advanced / tests |
+| `flutter_offline_sync_pull_flutter` | Flutter apps (pull) |
+| `flutter_offline_sync_ui` | Optional UI |
 
-## Before first publish
+Publish **core / pull first**, then push/pull flutter adapters and UI (they depend on the hosted versions).
 
-1. Root and per-package **LICENSE** (MIT)
-2. Remove `publish_to: none` on packages you ship
-3. `CHANGELOG.md` per package
-4. `homepage` and `documentation` in each `pubspec.yaml`:
+## Why these names
 
-```yaml
-homepage: https://lidhin.github.io/flutter_offline_sync/
-documentation: https://lidhin.github.io/flutter_offline_sync/guide/introduction
-repository: https://github.com/LidhinCS/flutter_offline_sync
-issue_tracker: https://github.com/LidhinCS/flutter_offline_sync/issues
+`offline_sync_core` and `offline_sync_flutter` are already taken on pub.dev by unrelated packages. This suite uses the `flutter_offline_sync_*` prefix (aligned with the GitHub repo).
+
+## Checklist (each release)
+
+1. Confirm pub.dev names are free (or already owned by you)
+2. Bump `version` in each package `pubspec.yaml` (semver)
+3. Update each package `CHANGELOG.md` and `docs/changelog.md`
+4. Confirm `LICENSE` (MIT), `README.md`, homepage / repository / topics
+5. Ensure Drift `.g.dart` files are up to date and committed
+6. `dart pub get` at repo root (workspace)
+7. `dart run melos run analyze` and `dart run melos run test`
+8. Dry-run (dependency order):
+
+```bash
+cd packages/flutter_offline_sync_core && dart pub publish --dry-run
+cd ../flutter_offline_sync_pull && dart pub publish --dry-run
+cd ../flutter_offline_sync_push && dart pub publish --dry-run
+cd ../flutter_offline_sync_pull_flutter && dart pub publish --dry-run
+cd ../flutter_offline_sync_ui && dart pub publish --dry-run
 ```
 
-5. Run `dart pub publish --dry-run` in each package directory
-6. Commit generated Drift `.g.dart` files or document codegen for consumers
-7. Tag release: `v0.1.0` — consumers should pin Git `ref` to tags
+9. Publish in the same order (omit `--dry-run`)
+10. After first publish of core/pull, remove `dependency_overrides` from push/ui **examples**
+11. Git tag: `v0.1.0`
+12. Deploy docs site; update installation snippets
 
 ## Workspace resolution
 
-Development packages may use `resolution: workspace`. Published packages should expose normal pub.dev version constraints for consumers.
+Packages use `resolution: workspace` and version constraints between suite members. Local `dart pub get` at the monorepo root resolves siblings from the workspace. Published consumers resolve from pub.dev.
 
 ## Docs site
 
-Deploy from `docs/` via GitHub Actions. Update changelog page after each release.
+Deploy from `docs/` via GitHub Actions. Update the changelog page after each release.
 
 ## Versioning
 
