@@ -2,7 +2,7 @@ name: flutter_offline_sync_pull
 description: >
   Pull coordinator for offline-first apps: paginated list sync, entity-batch
   detail sync, and Drift-backed checkpoints.
-version: 0.1.1
+version: 0.1.2
 resolution: workspace
 
 homepage: https://lidhincs.github.io/flutter_offline_sync/

@@ -1,4 +1,4 @@
-## 0.1.1
+## 0.1.2
 
 ### Fixes
 
@@ -6,6 +6,10 @@
 - Correct homepage / documentation URLs (`lidhincs.github.io`)
 - Raise `drift` / `drift_dev` lower bound to `^2.35.3` for generated manager APIs
 - Prefer initializing formals in `PullCoordinator` constructor
+
+## 0.1.1
+
+Unpublished locally; changes shipped in **0.1.2**.
 
 ## 0.1.0
 

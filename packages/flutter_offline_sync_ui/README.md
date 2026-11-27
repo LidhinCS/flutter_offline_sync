@@ -13,7 +13,7 @@ job streams and shows sync status per screen or feature.
 
 ```yaml
 dependencies:
-  flutter_offline_sync_ui: ^0.1.1
+  flutter_offline_sync_ui: ^0.1.2
 ```
 
 ## Quick start

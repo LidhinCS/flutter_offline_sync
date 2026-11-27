@@ -10,9 +10,9 @@ Packages are published on [pub.dev](https://pub.dev).
 
 ```yaml
 dependencies:
-  flutter_offline_sync_push: ^0.1.1
-  flutter_offline_sync_pull_flutter: ^0.1.1
-  flutter_offline_sync_ui: ^0.1.1 # optional
+  flutter_offline_sync_push: ^0.1.2
+  flutter_offline_sync_pull_flutter: ^0.1.2
+  flutter_offline_sync_ui: ^0.1.2 # optional
 ```
 
 `flutter_offline_sync_push` and `flutter_offline_sync_pull_flutter` **re-export** their core packages — you usually do not need separate `flutter_offline_sync_core` / `flutter_offline_sync_pull` entries unless you use core-only (tests, CLI).
@@ -34,19 +34,19 @@ dependencies:
   flutter_offline_sync_push:
     git:
       url: https://github.com/LidhinCS/flutter_offline_sync.git
-      ref: v0.1.1
+      ref: v0.1.2
       path: packages/flutter_offline_sync_push
 
   flutter_offline_sync_pull_flutter:
     git:
       url: https://github.com/LidhinCS/flutter_offline_sync.git
-      ref: v0.1.1
+      ref: v0.1.2
       path: packages/flutter_offline_sync_pull_flutter
 
   flutter_offline_sync_ui:
     git:
       url: https://github.com/LidhinCS/flutter_offline_sync.git
-      ref: v0.1.1
+      ref: v0.1.2
       path: packages/flutter_offline_sync_ui
 ```
 

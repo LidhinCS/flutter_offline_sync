@@ -17,7 +17,7 @@ For a full app with App DB + push + pull + UI, run [`examples/notes_app`](/examp
 
 ```yaml
 dependencies:
-  flutter_offline_sync_push: ^0.1.1
+  flutter_offline_sync_push: ^0.1.2
 ```
 
 Then:

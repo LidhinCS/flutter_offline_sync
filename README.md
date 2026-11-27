@@ -22,9 +22,9 @@ Offline-first sync for Flutter/Dart: **push** write queue, **pull** coordinator,
 
 ```yaml
 dependencies:
-  flutter_offline_sync_push: ^0.1.1
-  flutter_offline_sync_pull_flutter: ^0.1.1
-  flutter_offline_sync_ui: ^0.1.1 # optional
+  flutter_offline_sync_push: ^0.1.2
+  flutter_offline_sync_pull_flutter: ^0.1.2
+  flutter_offline_sync_ui: ^0.1.2 # optional
 ```
 
 `flutter_offline_sync_push` and `flutter_offline_sync_pull_flutter` re-export their core packages.

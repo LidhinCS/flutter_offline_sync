@@ -2,7 +2,7 @@ name: flutter_offline_sync_pull_flutter
 description: >
   Flutter adapters for flutter_offline_sync_pull: Workmanager background pull,
   connectivity-triggered foreground pull.
-version: 0.1.1
+version: 0.1.2
 resolution: workspace
 
 homepage: https://lidhincs.github.io/flutter_offline_sync/
@@ -24,7 +24,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_offline_sync_pull: ^0.1.0
+  flutter_offline_sync_pull: ^0.1.2
   connectivity_plus: ^7.3.1
   workmanager: ^0.10.1+2
 

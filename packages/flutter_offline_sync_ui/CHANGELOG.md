@@ -1,4 +1,4 @@
-## 0.1.1
+## 0.1.2
 
 ### Fixes
 
@@ -7,6 +7,11 @@
 - Migrate widgets from deprecated `package:flutter/material.dart` to `package:material_ui`
 - Require Flutter `>=3.47.0` / Dart `^3.13.0` (for `material_ui`)
 - Remove unnecessary library name
+- Depend on `flutter_offline_sync_core: ^0.1.2`
+
+## 0.1.1
+
+Unpublished locally; changes shipped in **0.1.2**.
 
 ## 0.1.0
 

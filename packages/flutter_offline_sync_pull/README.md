@@ -17,7 +17,7 @@ sync, entity-batch detail sync, and Drift-backed checkpoints.
 
 ```yaml
 dependencies:
-  flutter_offline_sync_pull: ^0.1.1
+  flutter_offline_sync_pull: ^0.1.2
 ```
 
 Most Flutter apps should depend on [`flutter_offline_sync_pull_flutter`](https://pub.dev/packages/flutter_offline_sync_pull_flutter) instead (re-exports this package).

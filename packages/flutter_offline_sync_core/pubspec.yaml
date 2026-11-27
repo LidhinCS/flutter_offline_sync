@@ -2,7 +2,7 @@ name: flutter_offline_sync_core
 description: >
   Offline-first write queue for Flutter/Dart: jobs and steps with ordered
   dependent API calls, partial retry, and conflict pause.
-version: 0.1.1
+version: 0.1.2
 resolution: workspace
 
 homepage: https://lidhincs.github.io/flutter_offline_sync/
