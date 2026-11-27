@@ -21,3 +21,6 @@ example/android/local.properties
 example/macos/Flutter/ephemeral/
 example/linux/flutter/ephemeral/
 example/windows/flutter/ephemeral/
+
+# Generated Flutter registrant (regenerated locally)
+example/**/GeneratedPluginRegistrant.*
