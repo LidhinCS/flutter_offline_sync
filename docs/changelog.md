@@ -4,7 +4,7 @@ Aggregated release notes for **0.1.0**. Per-package details live in each package
 
 ## 0.1.0 — 2025-11-27
 
-First public release of the offline_sync suite.
+First public release of the flutter_offline_sync suite.
 
 | Package | Version | pub.dev |
 | --- | --- | --- |

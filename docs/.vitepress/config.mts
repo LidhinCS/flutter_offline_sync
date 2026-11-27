@@ -8,7 +8,7 @@ const buyMeACoffeeButton =
 
 export default withMermaid(
   defineConfig({
-    title: 'offline_sync',
+    title: 'flutter_offline_sync',
     description:
       'Offline-first sync for Flutter: push write queue, pull coordinator, and UI widgets.',
     base: '/flutter_offline_sync/',
@@ -32,7 +32,7 @@ export default withMermaid(
       startOnLoad: false,
     },
     themeConfig: {
-      logo: { text: 'offline_sync' },
+      logo: { text: 'flutter_offline_sync' },
       nav: [
         { text: 'Guide', link: '/guide/introduction', activeMatch: '/guide/' },
         { text: 'Packages', link: '/packages/', activeMatch: '/packages/' },

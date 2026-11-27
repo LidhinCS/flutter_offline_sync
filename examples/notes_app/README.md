@@ -34,7 +34,7 @@ lib/
   features/notes/{domain,data,presentation}
 ```
 
-Domain has **no** `offline_sync_*` imports. Handlers live under `data/sync/`.
+Domain has **no** `flutter_offline_sync_*` imports. Handlers live under `data/sync/`.
 
 Fake network: `FakeNotesApi` (in-memory). Background Workmanager is initialized
 with `registerPeriodicTask: false` (same as package examples).

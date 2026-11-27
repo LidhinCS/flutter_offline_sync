@@ -79,7 +79,7 @@ await coordinator.runAll();
 Handlers call your API and upsert into **your** `AppDatabase` tables. This
 package only stores **checkpoints** in `flutter_offline_sync_pull.sqlite`.
 
-## With offline_sync (push + pull)
+## With flutter_offline_sync (push + pull)
 
 ```dart
 await engine.syncAll();        // flutter_offline_sync_core / flutter

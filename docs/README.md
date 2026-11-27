@@ -1,6 +1,6 @@
-# offline_sync documentation
+# flutter_offline_sync documentation
 
-VitePress site for the offline_sync packages.
+VitePress site for the flutter_offline_sync packages.
 
 ## Local development
 

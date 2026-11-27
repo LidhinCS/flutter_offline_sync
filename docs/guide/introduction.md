@@ -1,6 +1,6 @@
 # Introduction
 
-**offline_sync** is a set of Dart/Flutter packages for **offline-first** apps that need reliable writes when offline and structured pulls when back online — without folding everything into one generic “sync engine.”
+**flutter_offline_sync** is a set of Dart/Flutter packages for **offline-first** apps that need reliable writes when offline and structured pulls when back online — without folding everything into one generic “sync engine.”
 
 ## The problem
 
@@ -11,7 +11,7 @@ Most mobile apps need two different things:
 
 A flat outbox table handles simple POST retries but cannot express **“run B only after A succeeds, using A’s response.”** A single “sync everything” blob also mixes **your business data** with **sync metadata**.
 
-## What offline_sync provides
+## What flutter_offline_sync provides
 
 | Layer | Packages | Responsibility |
 | --- | --- | --- |
@@ -39,7 +39,7 @@ Not a fit:
 
 - Real-time-only apps with no local DB
 - Apps that only need a simple single-request retry queue with no dependencies (a minimal outbox might suffice)
-- Replacing your entire data layer — offline_sync sits **beside** your App DB
+- Replacing your entire data layer — flutter_offline_sync sits **beside** your App DB
 
 ## Next steps
 

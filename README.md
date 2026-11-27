@@ -1,4 +1,4 @@
-# offline_sync
+# flutter_offline_sync
 
 <p align="center">
   <img src="docs/public/hero.png" alt="Flutter offline sync — phone, local database, and offline indicator" width="420" />
