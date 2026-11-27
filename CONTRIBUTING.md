@@ -27,6 +27,4 @@ dart run melos run build_runner
 cd docs && npm install && npm run dev
 ```
 
-## Publishing
-
-See [docs/advanced/publishing.md](docs/advanced/publishing.md). Do not publish from a fork without coordinating with maintainers.
+Do not publish packages from a fork without coordinating with maintainers.

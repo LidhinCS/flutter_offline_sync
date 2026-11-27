@@ -34,4 +34,4 @@ Site URL (default): `https://lidhin.github.io/flutter_offline_sync/`
 | `guide/` | Integration guides |
 | `packages/` | Per-package overview |
 | `examples/` | Example apps |
-| `advanced/` | Publishing and contributor notes |
+| `advanced/` | Deeper topics and contributor notes |

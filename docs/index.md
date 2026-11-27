@@ -40,4 +40,6 @@ features:
 - **Pull only** — add `flutter_offline_sync_pull_flutter` for server-to-device ingest.
 - **Full stack** — both adapters + optional `flutter_offline_sync_ui` for job status UI.
 
+Prefer the runnable **[Offline Notes example](/examples/)** (`examples/notes_app`) to see App DB + push + pull + UI together.
+
 See [Installation](/guide/installation) for `pubspec` snippets (Git and pub.dev).

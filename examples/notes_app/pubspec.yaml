@@ -1,0 +1,41 @@
+name: notes_app
+description: Full-stack teaching example for flutter_offline_sync (push + pull + UI).
+publish_to: none
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  drift: ^2.34.0
+  sqlite3: ^3.5.0
+  sqlite3_flutter_libs: ^0.5.24
+  path_provider: ^2.1.3
+  path: ^1.9.0
+  uuid: ^4.4.0
+  workmanager: ^0.10.1+2
+  flutter_offline_sync_push:
+    path: ../../packages/flutter_offline_sync_push
+  flutter_offline_sync_pull_flutter:
+    path: ../../packages/flutter_offline_sync_pull_flutter
+  flutter_offline_sync_ui:
+    path: ../../packages/flutter_offline_sync_ui
+
+dependency_overrides:
+  flutter_offline_sync_core:
+    path: ../../packages/flutter_offline_sync_core
+  flutter_offline_sync_pull:
+    path: ../../packages/flutter_offline_sync_pull
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  drift_dev: ^2.34.0
+  build_runner: ^2.4.11
+
+flutter:
+  uses-material-design: true
