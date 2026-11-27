@@ -1,6 +1,6 @@
 # Clean architecture
 
-offline_sync fits **feature-first** clean architecture. Packages stay in **infrastructure**; features own business data and handlers.
+flutter_offline_sync fits **feature-first** clean architecture. Packages stay in **infrastructure**; features own business data and handlers.
 
 ## Folder layout
 
@@ -29,7 +29,7 @@ lib/
 ## Layer rules
 
 - **Presentation** — Bloc watches App DB via repository streams. No Dio, no `PullCoordinator` in widgets.
-- **Domain** — contracts only; no `offline_sync_*` imports.
+- **Domain** — contracts only; no `flutter_offline_sync_*` imports.
 - **Data** — handlers, DAOs, DTOs, repository impls.
 - **core/di** — `SyncModule`, `PullModule`, registries from `buildRegistry` / `buildPullRegistry`.
 

@@ -2,7 +2,7 @@
 layout: home
 
 hero:
-  name: offline_sync
+  name: flutter_offline_sync
   text: Offline-first sync for Flutter
   tagline: Push write queue, pull coordinator, Workmanager adapters, and optional UI widgets.
   image:
