@@ -26,7 +26,3 @@ dart run melos run build_runner
 - Open PRs against [GitHub](https://github.com/LidhinCS/flutter_offline_sync)
 - Run `dart run melos run ci` before submitting
 - Update docs in `docs/` when changing public behavior
-
-## Publishing
-
-See [Publishing](/advanced/publishing).
