@@ -1,5 +1,3 @@
-library flutter_offline_sync_core;
-
 export 'src/db/database.dart';
 export 'src/db/sync_jobs_table.dart' show JobStatus;
 export 'src/db/sync_steps_table.dart' show StepStatus;

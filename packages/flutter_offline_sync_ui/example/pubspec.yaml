@@ -4,16 +4,16 @@ publish_to: none
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.12.2
+  sdk: ^3.13.0
 
 dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
+  material_ui: ^1.11.1
   flutter_offline_sync_ui:
     path: ../
 
-# Until flutter_offline_sync_core is on pub.dev, force the sibling path.
 dependency_overrides:
   flutter_offline_sync_core:
     path: ../../flutter_offline_sync_core

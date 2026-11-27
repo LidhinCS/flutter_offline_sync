@@ -4,6 +4,9 @@
 
 - Correct homepage / documentation URLs (`lidhincs.github.io`)
 - Raise `drift` lower bound to `^2.35.3`
+- Migrate widgets from deprecated `package:flutter/material.dart` to `package:material_ui`
+- Require Flutter `>=3.47.0` / Dart `^3.13.0` (for `material_ui`)
+- Remove unnecessary library name
 
 ## 0.1.0
 

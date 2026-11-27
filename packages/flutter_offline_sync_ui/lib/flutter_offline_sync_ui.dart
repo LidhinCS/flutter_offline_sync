@@ -1,5 +1,3 @@
-library flutter_offline_sync_ui;
-
 export 'package:flutter_offline_sync_core/flutter_offline_sync_core.dart';
 
 export 'src/job_status_theme.dart';

@@ -4,6 +4,7 @@
 
 - Correct homepage / documentation URLs (`lidhincs.github.io`)
 - Raise `drift` lower bound to `^2.35.3`
+- Prefer initializing formals in `ConnectivityPullTrigger.forTesting`
 
 ## 0.1.0
 

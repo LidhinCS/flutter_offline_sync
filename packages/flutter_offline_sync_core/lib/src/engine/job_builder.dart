@@ -47,10 +47,9 @@ class JobBuilder {
     this._db, {
     required this.feature,
     required this.screen,
-    Map<String, dynamic>? meta,
+    this._meta,
     String? idempotencyKey,
-  }) : _meta = meta,
-       _idempotencyKey = idempotencyKey ?? const Uuid().v4();
+  }) : _idempotencyKey = idempotencyKey ?? const Uuid().v4();
 
   final SyncDatabase _db;
   final String feature;

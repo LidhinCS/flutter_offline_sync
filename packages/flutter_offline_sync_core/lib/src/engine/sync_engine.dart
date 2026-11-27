@@ -19,13 +19,10 @@ import 'retry_policy.dart';
 /// transitions -- handlers just do work and return a result.
 class SyncEngine {
   SyncEngine({
-    required SyncDatabase db,
-    required SyncHandlerRegistry registry,
-    RetryPolicy retryPolicy = const RetryPolicy(),
-  }) : _db = db,
-       _registry = registry,
-       _retryPolicy = retryPolicy,
-       _crossJob = CrossJobResolver(db);
+    required this._db,
+    required this._registry,
+    this._retryPolicy = const RetryPolicy(),
+  }) : _crossJob = CrossJobResolver(_db);
 
   final SyncDatabase _db;
   final SyncHandlerRegistry _registry;

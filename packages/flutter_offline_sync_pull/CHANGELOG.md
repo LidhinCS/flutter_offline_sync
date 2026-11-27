@@ -5,6 +5,7 @@
 - Shorten pubspec description to meet pub.dev limits
 - Correct homepage / documentation URLs (`lidhincs.github.io`)
 - Raise `drift` / `drift_dev` lower bound to `^2.35.3` for generated manager APIs
+- Prefer initializing formals in `PullCoordinator` constructor
 
 ## 0.1.0
 

@@ -156,14 +156,14 @@ packages:
       path: "../../flutter_offline_sync_pull"
       relative: true
     source: path
-    version: "0.1.0"
+    version: "0.1.1"
   flutter_offline_sync_pull_flutter:
     dependency: "direct main"
     description:
       path: ".."
       relative: true
     source: path
-    version: "0.1.0"
+    version: "0.1.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter

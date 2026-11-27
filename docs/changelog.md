@@ -20,6 +20,7 @@ Pub.dev score / metadata fixes across the suite.
 - Shorten long pubspec descriptions
 - Drop obsolete `sqlite3_flutter_libs`; keep `sqlite3` 3.x
 - Raise Drift lower bound to `^2.35.3` for pub lower-bound analysis
+- Migrate `flutter_offline_sync_ui` to `package:material_ui` (Flutter 3.47+)
 
 ## 0.1.0 — 2026-11-27
 

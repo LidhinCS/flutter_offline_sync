@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_offline_sync_core/flutter_offline_sync_core.dart';
 
 import 'offline_sync_scope.dart';

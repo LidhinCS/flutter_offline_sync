@@ -9,10 +9,9 @@ import '../models/pull_step.dart';
 /// Runs registered [PullFeature] steps: paginated lists and entity batches.
 class PullCoordinator {
   PullCoordinator({
-    required PullDatabase db,
-    required PullFeatureRegistry registry,
-  }) : _db = db,
-       _registry = registry;
+    required this._db,
+    required this._registry,
+  });
 
   final PullDatabase _db;
   final PullFeatureRegistry _registry;

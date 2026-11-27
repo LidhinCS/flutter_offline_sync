@@ -18,13 +18,14 @@ topics:
   - ui
 
 environment:
-  sdk: ^3.12.2
-  flutter: ">=3.16.0"
+  sdk: ^3.13.0
+  flutter: ">=3.47.0"
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_offline_sync_core: ^0.1.0
+  material_ui: ^1.11.1
 
 dev_dependencies:
   flutter_test:

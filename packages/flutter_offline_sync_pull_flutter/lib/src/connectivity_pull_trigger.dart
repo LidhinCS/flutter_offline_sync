@@ -13,8 +13,8 @@ class ConnectivityPullTrigger {
 
   ConnectivityPullTrigger.forTesting(
     this.coordinator,
-    Stream<List<ConnectivityResult>> connectivityStream,
-  ) : _connectivityStream = connectivityStream;
+    this._connectivityStream,
+  );
 
   final PullCoordinator coordinator;
   final Stream<List<ConnectivityResult>> _connectivityStream;

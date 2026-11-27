@@ -6,6 +6,7 @@
 - Correct homepage / documentation URLs (`lidhincs.github.io`)
 - Remove obsolete `sqlite3_flutter_libs` dependency (use `sqlite3` 3.x)
 - Raise `drift` / `drift_dev` lower bound to `^2.35.3` for generated manager APIs
+- Prefer initializing formals in `SyncEngine` / `JobBuilder` constructors
 
 ## 0.1.0
 
