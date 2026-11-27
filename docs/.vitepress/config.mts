@@ -13,12 +13,18 @@ export default withMermaid(
       'Offline-first sync for Flutter: push write queue, pull coordinator, and UI widgets.',
     base: '/flutter_offline_sync/',
     cleanUrls: true,
+    // Keep the dark/light toggle, but prefer light for first-time visitors.
+    // (VitePress types only document initialValue: 'dark'; 'light' works at runtime.)
+    appearance: {
+      initialValue: 'light',
+    } as { initialValue: 'dark' },
     lastUpdated: true,
     head: [
       ['link', { rel: 'icon', href: '/flutter_offline_sync/favicon.ico' }],
     ],
     // Mermaid 11 pulls in CJS packages (e.g. fastdom) that break Vite ESM without
-    // prebundling — that surfaces as a blank white docs site.
+    // prebundling — that surfaces as a blank white docs site. Pin Mermaid 10 in
+    // package.json and prebundle it here.
     vite: {
       optimizeDeps: {
         include: ['mermaid'],
@@ -50,12 +56,20 @@ export default withMermaid(
             text: 'Getting started',
             items: [
               { text: 'Introduction', link: '/guide/introduction' },
+              { text: 'Installation', link: '/guide/installation' },
+              { text: 'Quick Start', link: '/guide/quick-start' },
+              { text: 'Choosing Push or Pull', link: '/guide/choosing-packages' },
+            ],
+          },
+          {
+            text: 'Fundamentals',
+            items: [
               { text: 'Core concepts', link: '/guide/core-concepts' },
               { text: 'Architecture', link: '/guide/architecture' },
             ],
           },
           {
-            text: 'Sync paths',
+            text: 'Push & Pull',
             items: [
               { text: 'Push (write queue)', link: '/guide/push' },
               { text: 'Pull (read coordinator)', link: '/guide/pull' },
@@ -68,12 +82,17 @@ export default withMermaid(
           {
             text: 'Integration',
             items: [
-              { text: 'Installation', link: '/guide/installation' },
               { text: 'Clean architecture', link: '/guide/clean-architecture' },
               { text: 'Drift & App database', link: '/guide/drift' },
               { text: 'Authentication', link: '/guide/authentication' },
               { text: 'UI widgets', link: '/guide/ui' },
+            ],
+          },
+          {
+            text: 'Help',
+            items: [
               { text: 'Troubleshooting', link: '/guide/troubleshooting' },
+              { text: 'FAQ', link: '/guide/faq' },
             ],
           },
         ],

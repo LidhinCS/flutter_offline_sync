@@ -1,5 +1,9 @@
 # Installation
 
+Add the packages that match your sync direction, then continue to [Quick Start](/guide/quick-start).
+
+Not sure which packages? See [Choosing Push or Pull](/guide/choosing-packages).
+
 Packages are published on [pub.dev](https://pub.dev).
 
 ## pub.dev (recommended)
@@ -75,4 +79,8 @@ Ensure your app uses a compatible Flutter / Dart SDK (see each package’s `pubs
 | Job status UI | `flutter_offline_sync_ui` |
 | Unit tests without Flutter UI | `flutter_offline_sync_core` or `flutter_offline_sync_pull` directly |
 
-Next: [Push guide](/guide/push) or [Pull guide](/guide/pull).
+## Next
+
+1. [Quick Start](/guide/quick-start) — first working enqueue + `syncAll`  
+2. [Push](/guide/push) / [Pull](/guide/pull) — deeper guides  
+3. [Offline Notes example](/examples/) — full integration sample  

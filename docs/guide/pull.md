@@ -1,76 +1,139 @@
 # Pull (read coordinator)
 
-The pull path **ingests server data** into your App DB using paginated lists and entity batches, with checkpoints so work can resume.
+**Pull** downloads server data into **your AppDatabase**, using pagination and optional detail batches, with checkpoints so work can resume.
 
-## Quick start
+## What Pull does
+
+1. You register `PullFeature`s with steps and handlers
+2. `PullCoordinator.runAll()` / `runFeature()` drives the steps
+3. Handlers call **your** API and upsert into **App DB**
+4. Progress (page, `hasMore`, errors) is stored in **PullDatabase** — not in App DB
+
+## When to use it
+
+- Refreshing lists from the server
+- Fetching detail for ids that are still incomplete locally
+- Resuming after the app was killed mid-sync
+- Bounding work per foreground tap or background task
+
+## Simple example (paginated list)
 
 ```dart
 import 'package:flutter_offline_sync_pull_flutter/flutter_offline_sync_pull_flutter.dart';
 
+class NotesListPullHandler extends PullStepHandler {
+  NotesListPullHandler(this.api, this.local);
+
+  final NotesApi api; // your type
+  final NotesLocalDatasource local; // your type — upserts App DB
+
+  @override
+  Future<PullStepResult> fetch(PullContext ctx) async {
+    final page = await api.fetchPage(page: ctx.page, pageSize: ctx.pageSize);
+    for (final note in page.items) {
+      await local.upsertFromServer(note);
+    }
+    return PullStepResult.success(hasMore: page.hasMore);
+  }
+}
+
+final pullDb = PullDatabase();
 final registry = PullFeatureRegistry()
   ..register(
     PullFeature(
-      name: 'posts',
+      name: 'notes',
+      maxPagesPerRun: 2,
       steps: [
         PaginatedListPullStep(
           key: 'list',
           pageSize: 20,
-          handler: PostListPullHandler(dio, postLocal),
-        ),
-      ],
-    ),
-  )
-  ..register(
-    PullFeature(
-      name: 'products',
-      maxPagesPerRun: 1,
-      maxBatchesPerRun: 2,
-      steps: [
-        PaginatedListPullStep(
-          key: 'list',
-          pageSize: 20,
-          handler: ProductListPullHandler(dio, productLocal),
-        ),
-        EntityBatchPullStep(
-          key: 'detail',
-          dependsOn: ['list'],
-          batchSize: 10,
-          idSelector: productLocal.idsMissingDetail,
-          handler: ProductDetailPullHandler(dio, productLocal),
+          handler: NotesListPullHandler(api, local),
         ),
       ],
     ),
   );
 
-final coordinator = PullCoordinator(
-  db: PullDatabase(),
-  registry: registry,
-);
-
-await coordinator.runFeature('posts');
-await coordinator.runAll();
+final coordinator = PullCoordinator(db: pullDb, registry: registry);
+await coordinator.runFeature('notes');
+// or: await coordinator.runAll();
 ```
+
+::: warning
+`NotesApi` / `NotesLocalDatasource` are **your** types. The package does not ship them. See [`examples/notes_app`](/examples/) for a complete Fake API + Drift version.
+:::
+
+## List + detail (entity batch)
+
+Practical flow:
+
+1. Pull paginated product list → upsert summaries  
+2. `idSelector` returns product ids still missing detail  
+3. `EntityBatchPullStep` fetches those ids in batches  
+4. Upsert details into App DB  
+5. Checkpoints track progress; next run continues
+
+```dart
+PullFeature(
+  name: 'products',
+  maxPagesPerRun: 1,
+  maxBatchesPerRun: 2,
+  steps: [
+    PaginatedListPullStep(
+      key: 'list',
+      pageSize: 20,
+      handler: ProductListPullHandler(dio, productLocal),
+    ),
+    EntityBatchPullStep(
+      key: 'detail',
+      dependsOn: ['list'],
+      batchSize: 10,
+      idSelector: productLocal.idsMissingDetail,
+      handler: ProductDetailPullHandler(dio, productLocal),
+    ),
+  ],
+)
+```
+
+`idSelector` is `Future<List<String>> Function(PullContext ctx)` and should query **your** App DB.
 
 ## Step types
 
 | Type | Use for |
 | --- | --- |
-| `PaginatedListPullStep` | `page` + `limit` list APIs |
-| `EntityBatchPullStep` | Per-id detail; `idSelector` returns ids missing locally |
+| `PaginatedListPullStep` | List APIs with page / limit |
+| `EntityBatchPullStep` | Detail-by-id; `idSelector` supplies ids |
 
-Handlers call your API and **upsert into AppDatabase** via local datasources — not into `PullDatabase`.
+## Checkpoints & resumability
 
-## Checkpoints
+`PullDatabase` (default file `flutter_offline_sync_pull.sqlite`) stores per feature/step:
 
-`PullDatabase` stores page, `hasMore`, and status per feature/step. Your UI reads **App DB streams**, not checkpoints.
+- current page  
+- `hasMore`  
+- status / last error  
+
+If sync is interrupted, the next `runFeature` / `runAll` continues from checkpoints.
+
+**UI rule:** watch App DB streams for lists — not `PullDatabase`.
 
 ## Bounded runs
 
-`maxPagesPerRun` and `maxBatchesPerRun` cap work per `runFeature()` call — safe for foreground taps and background tasks.
+`maxPagesPerRun` and `maxBatchesPerRun` limit work **per coordinator call**. That keeps foreground taps and Workmanager tasks from running unbounded.
+
+## Results
+
+| Result | Meaning |
+| --- | --- |
+| `PullStepResult.success(hasMore: true/false)` | Page/batch OK; more work or done |
+| `PullStepResult.failure(message)` | Error recorded on the checkpoint |
 
 ## Flutter adapter
 
-[flutter_offline_sync_pull_flutter](/packages/flutter_offline_sync_pull_flutter) adds `FlutterPullCoordinator` and `runBackgroundPull`.
+[`flutter_offline_sync_pull_flutter`](/packages/flutter_offline_sync_pull_flutter) adds:
+
+- `FlutterPullCoordinator` — connectivity → `runAll`
+- `initBackgroundPull` / `runBackgroundPull`
+
+On reconnect with push + pull, flush writes first: [Architecture — reconnect order](/guide/architecture#reconnect-order).
 
 ## Package reference
 

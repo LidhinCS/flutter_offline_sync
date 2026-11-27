@@ -1,5 +1,9 @@
 # Drift & App database
 
+Your **AppDatabase** holds business entities. Package databases hold sync metadata only.
+
+Drift is a common choice for App DB and is what the packages use internally for Sync/Pull DBs — you may use another App DB stack if handlers can upsert into it.
+
 ## Separation
 
 | DB | What goes here |

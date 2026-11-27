@@ -1,11 +1,13 @@
 # Architecture
 
+Technical map of how the packages sit beside your app. Vocabulary: [Core concepts](/guide/core-concepts).
+
 ## High-level flow
 
 ```mermaid
 flowchart TB
   subgraph presentation [Presentation]
-    UI[Screens / Bloc]
+    UI[Screens]
   end
 
   subgraph app_data [Your app]
@@ -41,6 +43,17 @@ flowchart TB
   UI -->|watch streams| AppDB
 ```
 
+## Component responsibilities
+
+| Piece | Responsibility |
+| --- | --- |
+| Repository / UI | Enqueue jobs; read App DB for screens |
+| `SyncEngine` | Drain outbox; deps; retry; conflicts |
+| `SyncDatabase` | Persist jobs/steps |
+| `PullCoordinator` | Run features/steps with caps |
+| `PullDatabase` | Persist pull checkpoints |
+| Your handlers | HTTP + upsert App DB |
+
 ## Three databases
 
 Never merge these in documentation or mental model:
@@ -53,6 +66,27 @@ Never merge these in documentation or mental model:
 
 Packages **never** open your `AppDatabase`. Handlers you write call your DAOs/local datasources.
 
+## Push lifecycle
+
+```text
+JobBuilder.enqueue
+  → SyncDatabase (pending)
+SyncEngine.syncAll / runJob
+  → resolve handlers by taskType
+  → execute steps (dependsOn order)
+  → success output | failure | conflict
+```
+
+## Pull lifecycle
+
+```text
+PullCoordinator.runFeature / runAll
+  → load/create checkpoint
+  → PaginatedListPullStep and/or EntityBatchPullStep
+  → handler.fetch → upsert App DB
+  → update checkpoint (page, hasMore, status)
+```
+
 ## Reconnect order
 
 When connectivity returns:
@@ -60,7 +94,7 @@ When connectivity returns:
 1. **Push** — `await engine.syncAll()` (flush write queue)
 2. **Pull** — `await pullCoordinator.runAll()` (or per-feature)
 
-Foreground adapters (`FlutterSyncCoordinator`, `FlutterPullCoordinator`) trigger on connectivity; you can also run manually.
+Foreground adapters (`FlutterSyncCoordinator`, `FlutterPullCoordinator`) each listen for connectivity; coordinate order in your app when you run both manually.
 
 ## Background Workmanager
 
@@ -71,16 +105,16 @@ await runBackgroundSync(createBackgroundSyncEngine);
 await runBackgroundPull(createBackgroundPullCoordinator);
 ```
 
-Each factory re-opens package DBs at the same paths and rebuilds Dio + registries.
+Each factory re-opens package DBs at the same paths and rebuilds Dio + registries. See [Foreground & background](/guide/foreground-background).
 
-## Clean architecture placement
+## Integration boundaries
 
-| Piece | Layer |
+| Piece | Layer (typical) |
 | --- | --- |
-| `SyncTaskHandler` / `PullStepHandler` | Data (adapters) |
-| `buildRegistry` / `buildPullRegistry` | App DI / infrastructure |
+| `SyncTaskHandler` / `PullStepHandler` | Data |
+| `buildRegistry` / `buildPullRegistry` | App composition / DI |
 | `SyncEngine` / `PullCoordinator` | Infrastructure |
 | Repositories, App DB | Data |
-| Bloc / UI | Presentation |
+| Screens / state management | Presentation |
 
-See [Clean architecture](/guide/clean-architecture) for folder layout.
+The packages do not require Bloc, Riverpod, or Injectable. See [Clean architecture](/guide/clean-architecture) for a feature-first folder layout.
