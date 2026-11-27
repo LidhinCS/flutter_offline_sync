@@ -2,7 +2,7 @@ name: flutter_offline_sync_push
 description: >
   Flutter adapters for flutter_offline_sync_core: Workmanager background sync,
   connectivity-triggered foreground sync, and startup recovery.
-version: 0.1.0
+version: 0.1.1
 resolution: workspace
 
 homepage: https://lidhincs.github.io/flutter_offline_sync/

@@ -14,9 +14,9 @@ Typical app dependencies:
 
 ```yaml
 dependencies:
-  flutter_offline_sync_push: ^0.1.0
-  flutter_offline_sync_pull_flutter: ^0.1.0
-  flutter_offline_sync_ui: ^0.1.0 # optional
+  flutter_offline_sync_push: ^0.1.1
+  flutter_offline_sync_pull_flutter: ^0.1.1
+  flutter_offline_sync_ui: ^0.1.1 # optional
 ```
 
 See [Installation](/guide/installation) for Git alternatives and package choice.

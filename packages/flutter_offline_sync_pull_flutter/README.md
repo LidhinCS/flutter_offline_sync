@@ -13,7 +13,7 @@ background pull and connectivity-triggered foreground pull.
 
 ```yaml
 dependencies:
-  flutter_offline_sync_pull_flutter: ^0.1.0
+  flutter_offline_sync_pull_flutter: ^0.1.1
 ```
 
 Pair with [flutter_offline_sync_push](https://pub.dev/packages/flutter_offline_sync_push) for full offline-first:

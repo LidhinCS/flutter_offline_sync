@@ -17,7 +17,7 @@ package owns everything that needs `flutter`, `workmanager`, or
 
 ```yaml
 dependencies:
-  flutter_offline_sync_push: ^0.1.0
+  flutter_offline_sync_push: ^0.1.1
 ```
 
 ## Quick start

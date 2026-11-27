@@ -15,7 +15,7 @@ image, then create a record using the returned URL.
 
 ```yaml
 dependencies:
-  flutter_offline_sync_core: ^0.1.0
+  flutter_offline_sync_core: ^0.1.1
 ```
 
 Most Flutter apps should depend on [`flutter_offline_sync_push`](https://pub.dev/packages/flutter_offline_sync_push) instead (re-exports this package).
