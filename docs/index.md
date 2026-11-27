@@ -4,17 +4,17 @@ layout: home
 hero:
   name: flutter_offline_sync
   text: Offline-first sync for Flutter
-  tagline: Push write queue, pull coordinator, Workmanager adapters, and optional UI widgets.
+  tagline: Queue offline writes, retry with dependencies, and pull server data into your local database — without replacing your app architecture.
   image:
     src: /hero.png
     alt: Flutter offline sync — phone, local database, and offline indicator
   actions:
     - theme: brand
-      text: Get started
-      link: /guide/introduction
+      text: Quick Start
+      link: /guide/quick-start
     - theme: alt
-      text: View on GitHub
-      link: https://github.com/LidhinCS/flutter_offline_sync
+      text: Introduction
+      link: /guide/introduction
 
 features:
   - title: Push queue
@@ -39,10 +39,11 @@ features:
 
 ## Choose your path
 
-- **Push only** — add `flutter_offline_sync_push` for offline writes and background sync.
-- **Pull only** — add `flutter_offline_sync_pull_flutter` for server-to-device ingest.
-- **Full stack** — both adapters + optional `flutter_offline_sync_ui` for job status UI.
+- **New here?** — [Introduction](/guide/introduction) → [Installation](/guide/installation) → [Quick Start](/guide/quick-start)
+- **Push only** — add `flutter_offline_sync_push` for offline writes and background sync
+- **Pull only** — add `flutter_offline_sync_pull_flutter` for server-to-device ingest
+- **Full stack** — both adapters + optional `flutter_offline_sync_ui`
 
 Prefer the runnable **[Offline Notes example](/examples/)** (`examples/notes_app`) to see App DB + push + pull + UI together.
 
-See [Installation](/guide/installation) for `pubspec` snippets (Git and pub.dev).
+See [Choosing Push or Pull](/guide/choosing-packages) for a decision table.

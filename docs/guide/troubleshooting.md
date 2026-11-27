@@ -1,51 +1,81 @@
 # Troubleshooting
 
+Practical failures and fixes. Conceptual Q&A: [FAQ](/guide/faq).
+
+## Handler not found / `StateError: No handler registered`
+
+**Cause:** `taskType` missing from the registry in the isolate that is running sync.
+
+**Fix:** Register the same builders in:
+
+1. Foreground `buildRegistry` / `buildPullRegistry`
+2. Background factory (shared function — do not diverge)
+
 ## `getIt` / Injectable not found in Workmanager
 
-**Cause:** Background isolate does not run `configureDependencies()`.
+**Cause:** Background isolate never ran `configureDependencies()`.
 
 **Fix:** Rebuild `SyncEngine`, `PullCoordinator`, Dio, and registries in top-level factories. Never call `getIt` in `callbackDispatcher`.
 
-## `melos: command not found` when running scripts
+## Pull list empty but checkpoint advances
 
-**Cause:** Nested `melos exec` with `dart run melos` on some setups.
+**Cause:** Handler updates checkpoints (via coordinator) but never upserts **AppDatabase**.
 
-**Fix:** Use root shell scripts in `pubspec.yaml` melos config or run package commands directly.
-
-## Drift: multiple databases warning in tests
-
-**Cause:** Multiple `PullDatabase` / `SyncDatabase` on same in-memory executor.
-
-**Fix:** One DB per test, unique `NativeDatabase.memory()`, close in `tearDown`.
+**Fix:** Upsert in `PullStepHandler.fetch` through your local datasource. UI must watch App DB, not checkpoints.
 
 ## Background sync never runs
 
-- Check Workmanager init and `callbackDispatcher` registered
+- Confirm `Workmanager().initialize(callbackDispatcher)` ran once
+- Confirm `@pragma('vm:entry-point')` on the dispatcher and factories
 - iOS: background fetch is best-effort
-- Android: battery optimization / force-stop blocks tasks
-- Verify `registerPeriodicTask` constraints (`NetworkType.connected`)
+- Android: battery optimization / force-stop can block tasks
+- Check `registerPeriodicTask` and `Constraints(networkType: NetworkType.connected)`
 
-## Token null in background
+## Token null / 401 in background
 
-- Device locked with restrictive Keychain accessibility
-- User logged out — skip sync, return `true` from task
-- Read secure storage again in background; do not use in-memory token
+- Re-read secure storage in the background factory (isolates do not share memory)
+- iOS: use Keychain accessibility that allows background reads ([Authentication](/guide/authentication))
+- If logged out, skip sync and return `true` from the Workmanager task
 
-## Pull list empty but checkpoint advances
+## Jobs stuck in `running`
 
-Handlers must upsert into **AppDatabase**. Checkpoint only tracks pull progress.
+Call `engine.recoverInterruptedWork()` or start `FlutterSyncCoordinator` (it recovers on startup). `syncAll` also recovers interrupted work at the beginning of a pass.
+
+## Conflict never clears
+
+Returning `.failure` on a 409 will not pause for UI resolution. Return `SyncStepResult.conflict(...)`, then `engine.resolveConflict(jobId, stepKey, resolution)`.
+
+## Drift: multiple databases warning in tests
+
+**Cause:** Multiple package DB instances on the same in-memory executor.
+
+**Fix:** One DB per test, unique `NativeDatabase.memory()` / `forTesting`, close in `tearDown`.
+
+## `melos: command not found` when running contributor scripts
+
+**Cause:** Nested melos invocation quirks on some setups.
+
+**Fix:** Use root scripts in `pubspec.yaml` melos config or run package commands directly (`dart analyze`, `flutter test`).
 
 ## `resolution: workspace` in package pubspecs
 
-Apps consuming via Git `path:` should not rely on workspace resolution. Published pub.dev packages will use normal version constraints.
+Apps consuming via Git `path:` should not rely on Melos workspace resolution. Published pub.dev packages use normal version constraints.
 
-## Handler not found
+## Self-referencing pull coordinator (copy/paste bug)
 
-Register handler in **both**:
+Wrong:
 
-1. Foreground `buildRegistry` / `buildPullRegistry` (DI)
-2. Background factory (same builder function)
+```dart
+final pullCoordinator = FlutterPullCoordinator(coordinator: pullCoordinator);
+```
+
+Right:
+
+```dart
+final pull = PullCoordinator(db: pullDb, registry: registry);
+final flutterPull = FlutterPullCoordinator(coordinator: pull);
+```
 
 ## Still stuck?
 
-Open an issue with: platform, foreground vs background, package versions, and whether push or pull path fails.
+Open an issue with: platform, foreground vs background, package versions, and whether the push or pull path fails.

@@ -2,51 +2,65 @@
 
 flutter_offline_sync fits **feature-first** clean architecture. Packages stay in **infrastructure**; features own business data and handlers.
 
+This layout is **optional**. The packages do not require Bloc, Injectable, or any specific state-management library.
+
+## What this integration accomplishes
+
+- Keeps domain free of sync-package imports  
+- Places handlers next to feature data code  
+- Centralizes registries and reconnect (`syncAll` then `runAll`)  
+
 ## Folder layout
 
 ```text
 lib/
   core/
     database/          # AppDatabase (all feature tables)
-    di/                # SyncModule, PullModule, DatabaseModule
+    di/                # composition: registries, engines
     background/        # Workmanager entrypoints
   features/
     <feature>/
       data/
-        tables/        # Drift Table
-        daos/          # @DriftAccessor
+        tables/        # Drift Table (if using Drift)
+        daos/
         datasources/   # local + remote
         repositories/
-        sync/          # optional: pull/push handlers
+        sync/          # SyncTaskHandler / PullStepHandler
       domain/
         entities/
-        repositories/
+        repositories/  # contracts only
       presentation/
-        cubit/
-        view/
+        # screens / cubit / etc.
 ```
 
 ## Layer rules
 
-- **Presentation** — Bloc watches App DB via repository streams. No Dio, no `PullCoordinator` in widgets.
+- **Presentation** — watches App DB via repository streams. No Dio, no `PullCoordinator` in widgets.
 - **Domain** — contracts only; no `flutter_offline_sync_*` imports.
-- **Data** — handlers, DAOs, DTOs, repository impls.
-- **core/di** — `SyncModule`, `PullModule`, registries from `buildRegistry` / `buildPullRegistry`.
+- **Data** — handlers, DAOs, DTOs, repository impls; repositories call `JobBuilder`.
+- **core** — build `SyncEngine` / `PullCoordinator`, `buildRegistry` / `buildPullRegistry`.
 
 ## Registries
 
-`buildPullRegistry` and `buildRegistry` are filled **when DI first resolves them**. Each new feature needs an explicit `register` call — not automatic when you add a folder.
+Fill `buildRegistry` / `buildPullRegistry` when you compose the app (or when DI first resolves them). Each feature needs an explicit `register` — adding a folder does nothing by itself.
 
-Inject feature **local datasources** into `PullModule.pullRegistry` so handlers can upsert.
+Inject feature **local datasources** into pull handlers so they can upsert App DB.
 
-## Reconnect service (app level)
+## Reconnect (app level)
+
+```dart
+await engine.syncAll();
+await pullCoordinator.runAll();
+```
+
+Keep this in bootstrap or a dedicated app sync service — not inside every screen. If you use GetIt:
 
 ```dart
 await getIt<SyncEngine>().syncAll();
 await getIt<PullCoordinator>().runAll();
 ```
 
-Keep this in bootstrap or a dedicated `AppSyncService`, not inside every screen.
+GetIt is optional; background isolates must **not** rely on it — [Foreground & background](/guide/foreground-background).
 
 ## Example mapping
 
@@ -57,5 +71,7 @@ Keep this in bootstrap or a dedicated `AppSyncService`, not inside every screen.
 | List pull handler | Feature `PullStepHandler` → local datasource |
 | Write enqueue | Repository → `JobBuilder` |
 | Checkpoints | `PullDatabase` (package) |
+
+Working sample: [`examples/notes_app`](/examples/).
 
 See [Drift & App database](/guide/drift).

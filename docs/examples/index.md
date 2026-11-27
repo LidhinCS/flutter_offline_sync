@@ -4,6 +4,8 @@
 
 The **Offline Notes** app under [`examples/notes_app`](https://github.com/LidhinCS/flutter_offline_sync/tree/main/examples/notes_app) is the primary teaching example. It wires push, pull, Flutter coordinators, UI widgets, and a real Drift **AppDatabase** in clean-architecture folders.
 
+For a minimal enqueue + `syncAll` walkthrough in docs only, see [Quick Start](/guide/quick-start).
+
 ```bash
 cd examples/notes_app
 flutter pub get

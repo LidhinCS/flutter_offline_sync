@@ -1,6 +1,6 @@
 # Advanced topics
 
-Deeper topics beyond the integration guides.
+Pointers to deeper behavior already documented in the guides. Prefer [Quick Start](/guide/quick-start) and [Core concepts](/guide/core-concepts) first.
 
 ## Topics covered in guides
 

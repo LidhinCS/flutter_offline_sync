@@ -1,6 +1,11 @@
 # Authentication
 
-Sync and pull handlers need authenticated Dio in **foreground and background**.
+Handlers need an authenticated HTTP client in **foreground and background**. This guide assumes Dio + secure token storage; the packages do not bundle auth.
+
+## What this integration accomplishes
+
+- Same API access for push/pull handlers in both isolates  
+- Avoid sharing in-memory tokens across Workmanager  
 
 ## Store tokens
 
