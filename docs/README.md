@@ -25,7 +25,7 @@ Pushes to `main` that touch `docs/` trigger [.github/workflows/docs.yml](../.git
 
 Enable **GitHub Pages** in repo settings: Source = **GitHub Actions**.
 
-Site URL (default): `https://lidhin.github.io/flutter_offline_sync/`
+Site URL (default): `https://lidhincs.github.io/flutter_offline_sync/`
 
 ## Structure
 

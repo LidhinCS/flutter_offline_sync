@@ -10,7 +10,7 @@ background sync, connectivity-triggered foreground sync, and startup recovery.
 package owns everything that needs `flutter`, `workmanager`, or
 `connectivity_plus`.
 
-**Docs:** [Foreground & background](https://lidhin.github.io/flutter_offline_sync/guide/foreground-background) ·
+**Docs:** [Foreground & background](https://lidhincs.github.io/flutter_offline_sync/guide/foreground-background) ·
 [GitHub](https://github.com/LidhinCS/flutter_offline_sync)
 
 ## Install

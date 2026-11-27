@@ -5,10 +5,10 @@ description: >
 version: 0.1.0
 resolution: workspace
 
-homepage: https://lidhin.github.io/flutter_offline_sync/
+homepage: https://lidhincs.github.io/flutter_offline_sync/
 repository: https://github.com/LidhinCS/flutter_offline_sync
 issue_tracker: https://github.com/LidhinCS/flutter_offline_sync/issues
-documentation: https://lidhin.github.io/flutter_offline_sync/guide/ui
+documentation: https://lidhincs.github.io/flutter_offline_sync/guide/ui
 
 topics:
   - offline
@@ -29,5 +29,5 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  drift: ^2.34.0
+  drift: ^2.35.3
   flutter_lints: ^6.0.0

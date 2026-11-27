@@ -8,7 +8,7 @@ Offline-first sync engine for Flutter/Dart. Models every offline write as a
 calls), where steps can depend on each other's output -- e.g. upload an
 image, then create a record using the returned URL.
 
-**Docs:** [Push guide](https://lidhin.github.io/flutter_offline_sync/guide/push) ·
+**Docs:** [Push guide](https://lidhincs.github.io/flutter_offline_sync/guide/push) ·
 [GitHub](https://github.com/LidhinCS/flutter_offline_sync)
 
 ## Install

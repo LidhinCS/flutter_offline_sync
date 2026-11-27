@@ -6,7 +6,7 @@
 Flutter UI widgets for [flutter_offline_sync_core](https://pub.dev/packages/flutter_offline_sync_core). Watches Drift
 job streams and shows sync status per screen or feature.
 
-**Docs:** [UI guide](https://lidhin.github.io/flutter_offline_sync/guide/ui) ·
+**Docs:** [UI guide](https://lidhincs.github.io/flutter_offline_sync/guide/ui) ·
 [GitHub](https://github.com/LidhinCS/flutter_offline_sync)
 
 ## Install

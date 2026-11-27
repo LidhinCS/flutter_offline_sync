@@ -6,7 +6,7 @@
 
 Offline-first sync for Flutter/Dart: **push** write queue, **pull** coordinator, Flutter adapters, and optional UI widgets.
 
-📖 **[Documentation](https://lidhin.github.io/flutter_offline_sync/)** · [GitHub](https://github.com/LidhinCS/flutter_offline_sync) · [Changelog](https://lidhin.github.io/flutter_offline_sync/changelog)
+📖 **[Documentation](https://lidhincs.github.io/flutter_offline_sync/)** · [GitHub](https://github.com/LidhinCS/flutter_offline_sync) · [Changelog](https://lidhincs.github.io/flutter_offline_sync/changelog)
 
 ## Packages
 
@@ -29,7 +29,7 @@ dependencies:
 
 `flutter_offline_sync_push` and `flutter_offline_sync_pull_flutter` re-export their core packages.
 
-See the [installation guide](https://lidhin.github.io/flutter_offline_sync/guide/installation) for details.
+See the [installation guide](https://lidhincs.github.io/flutter_offline_sync/guide/installation) for details.
 
 ## Development
 

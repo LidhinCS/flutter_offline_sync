@@ -6,7 +6,7 @@
 Flutter adapters for [flutter_offline_sync_pull](https://pub.dev/packages/flutter_offline_sync_pull): Workmanager
 background pull and connectivity-triggered foreground pull.
 
-**Docs:** [Foreground & background](https://lidhin.github.io/flutter_offline_sync/guide/foreground-background) ·
+**Docs:** [Foreground & background](https://lidhincs.github.io/flutter_offline_sync/guide/foreground-background) ·
 [GitHub](https://github.com/LidhinCS/flutter_offline_sync)
 
 ## Install

@@ -10,7 +10,7 @@ sync, entity-batch detail sync, and Drift-backed checkpoints.
 `flutter_offline_sync_core` = push write queue.  
 `flutter_offline_sync_pull` = pull ingest orchestration.
 
-**Docs:** [Pull guide](https://lidhin.github.io/flutter_offline_sync/guide/pull) ·
+**Docs:** [Pull guide](https://lidhincs.github.io/flutter_offline_sync/guide/pull) ·
 [GitHub](https://github.com/LidhinCS/flutter_offline_sync)
 
 ## Install
