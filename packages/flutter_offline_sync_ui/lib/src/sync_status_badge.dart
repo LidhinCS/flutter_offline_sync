@@ -46,13 +46,22 @@ class SyncStatusBadge extends StatelessWidget {
           );
         } else if (counts.running > 0) {
           label = '${counts.running} syncing';
-          appearance = jobStatusAppearance(JobStatus.running, colorScheme: colorScheme);
+          appearance = jobStatusAppearance(
+            JobStatus.running,
+            colorScheme: colorScheme,
+          );
         } else if (counts.pending > 0) {
           label = '${counts.pending} pending';
-          appearance = jobStatusAppearance(JobStatus.pending, colorScheme: colorScheme);
+          appearance = jobStatusAppearance(
+            JobStatus.pending,
+            colorScheme: colorScheme,
+          );
         } else {
           label = 'Up to date';
-          appearance = jobStatusAppearance(JobStatus.success, colorScheme: colorScheme);
+          appearance = jobStatusAppearance(
+            JobStatus.success,
+            colorScheme: colorScheme,
+          );
         }
 
         return Chip(

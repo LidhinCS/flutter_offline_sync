@@ -18,11 +18,13 @@ Future<void> main() async {
   await setupBackgroundPull();
   await flutterCoordinator.startForegroundPull();
 
-  runApp(OfflineSyncPullFlutterExampleApp(
-    store: store,
-    pullDb: pullDb,
-    coordinator: coordinator,
-  ));
+  runApp(
+    OfflineSyncPullFlutterExampleApp(
+      store: store,
+      pullDb: pullDb,
+      coordinator: coordinator,
+    ),
+  );
 }
 
 class OfflineSyncPullFlutterExampleApp extends StatelessWidget {
@@ -41,7 +43,9 @@ class OfflineSyncPullFlutterExampleApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'flutter_offline_sync_pull_flutter example',
-      theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      ),
       home: PullFlutterDemoScreen(
         store: store,
         pullDb: pullDb,
@@ -145,8 +149,12 @@ class _PullFlutterDemoScreenState extends State<PullFlutterDemoScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Workflows pending detail: ${widget.store.workflowsMissingDetail.length}'),
-                Text('Workflow details synced: ${widget.store.workflowDetails.length}'),
+                Text(
+                  'Workflows pending detail: ${widget.store.workflowsMissingDetail.length}',
+                ),
+                Text(
+                  'Workflow details synced: ${widget.store.workflowDetails.length}',
+                ),
                 const SizedBox(height: 8),
                 ...widget.store.workflowDetails.entries.map(
                   (e) => Text('• ${e.key}: ${e.value}'),
@@ -199,9 +207,15 @@ class _FeatureSection extends StatelessWidget {
             const SizedBox(height: 12),
             Row(
               children: [
-                FilledButton(onPressed: onPull, child: const Text('Pull next batch')),
+                FilledButton(
+                  onPressed: onPull,
+                  child: const Text('Pull next batch'),
+                ),
                 const SizedBox(width: 8),
-                OutlinedButton(onPressed: onReset, child: const Text('Reset demo')),
+                OutlinedButton(
+                  onPressed: onReset,
+                  child: const Text('Reset demo'),
+                ),
               ],
             ),
             const SizedBox(height: 16),

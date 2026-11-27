@@ -163,10 +163,11 @@ class SyncDatabase extends _$SyncDatabase {
   /// a failed step). Used by [SyncEngine.syncAll] to requeue after transient
   /// failures (e.g. offline) once connectivity returns.
   Future<List<SyncJob>> failedJobsEligibleForAutoRetry() async {
-    final failed = await (select(syncJobs)
-          ..where((j) => j.status.equalsValue(JobStatus.failed))
-          ..orderBy([(j) => OrderingTerm.asc(j.createdAt)]))
-        .get();
+    final failed =
+        await (select(syncJobs)
+              ..where((j) => j.status.equalsValue(JobStatus.failed))
+              ..orderBy([(j) => OrderingTerm.asc(j.createdAt)]))
+            .get();
 
     final eligible = <SyncJob>[];
     for (final job in failed) {
@@ -232,13 +233,14 @@ class SyncDatabase extends _$SyncDatabase {
     Duration olderThan = const Duration(days: 7),
   }) async {
     final cutoff = DateTime.now().subtract(olderThan);
-    final stale = await (select(syncJobs)..where(
-          (j) =>
-              (j.status.equalsValue(JobStatus.success) |
-                  j.status.equalsValue(JobStatus.cancelled)) &
-              j.updatedAt.isSmallerThanValue(cutoff),
-        ))
-        .get();
+    final stale =
+        await (select(syncJobs)..where(
+              (j) =>
+                  (j.status.equalsValue(JobStatus.success) |
+                      j.status.equalsValue(JobStatus.cancelled)) &
+                  j.updatedAt.isSmallerThanValue(cutoff),
+            ))
+            .get();
     if (stale.isEmpty) return 0;
 
     final ids = stale.map((j) => j.id).toList();

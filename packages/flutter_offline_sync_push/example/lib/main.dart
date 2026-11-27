@@ -35,7 +35,9 @@ class OfflineSyncFlutterExampleApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'flutter_offline_sync_push example',
-      theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal)),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
+      ),
       home: FlutterAdapterDemoScreen(db: db, engine: engine),
     );
   }
@@ -87,7 +89,10 @@ class FlutterAdapterDemoScreen extends StatelessWidget {
                 label: const Text('Sync now'),
               ),
               const SizedBox(height: 24),
-              Text('Jobs (${jobs.length})', style: Theme.of(context).textTheme.titleMedium),
+              Text(
+                'Jobs (${jobs.length})',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
               const SizedBox(height: 8),
               if (jobs.isEmpty)
                 const Text('No jobs yet.')

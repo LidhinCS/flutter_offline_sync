@@ -2,10 +2,7 @@ import 'handler.dart';
 
 /// Kind of pull work for a single step in a feature.
 sealed class PullStep {
-  const PullStep({
-    required this.key,
-    this.dependsOn = const [],
-  });
+  const PullStep({required this.key, this.dependsOn = const []});
 
   final String key;
   final List<String> dependsOn;

@@ -13,11 +13,13 @@ Future<void> main() async {
     registry: buildPullRegistry(store),
   );
 
-  runApp(OfflineSyncPullExampleApp(
-    store: store,
-    pullDb: pullDb,
-    coordinator: coordinator,
-  ));
+  runApp(
+    OfflineSyncPullExampleApp(
+      store: store,
+      pullDb: pullDb,
+      coordinator: coordinator,
+    ),
+  );
 }
 
 class OfflineSyncPullExampleApp extends StatelessWidget {
@@ -36,7 +38,9 @@ class OfflineSyncPullExampleApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'flutter_offline_sync_pull example',
-      theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange)),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange),
+      ),
       home: PullDemoScreen(
         store: store,
         pullDb: pullDb,
@@ -127,8 +131,12 @@ class _PullDemoScreenState extends State<PullDemoScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Workflows pending detail: ${widget.store.workflowsMissingDetail.length}'),
-                Text('Workflow details synced: ${widget.store.workflowDetails.length}'),
+                Text(
+                  'Workflows pending detail: ${widget.store.workflowsMissingDetail.length}',
+                ),
+                Text(
+                  'Workflow details synced: ${widget.store.workflowDetails.length}',
+                ),
                 const SizedBox(height: 8),
                 ...widget.store.workflowDetails.entries.map(
                   (e) => Text('• ${e.key}: ${e.value}'),
@@ -181,9 +189,15 @@ class _FeatureSection extends StatelessWidget {
             const SizedBox(height: 12),
             Row(
               children: [
-                FilledButton(onPressed: onPull, child: const Text('Pull next batch')),
+                FilledButton(
+                  onPressed: onPull,
+                  child: const Text('Pull next batch'),
+                ),
                 const SizedBox(width: 8),
-                OutlinedButton(onPressed: onReset, child: const Text('Reset demo')),
+                OutlinedButton(
+                  onPressed: onReset,
+                  child: const Text('Reset demo'),
+                ),
               ],
             ),
             const SizedBox(height: 16),

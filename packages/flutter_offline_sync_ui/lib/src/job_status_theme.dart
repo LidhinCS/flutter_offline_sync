@@ -20,34 +20,34 @@ JobStatusAppearance jobStatusAppearance(
 }) {
   return switch (status) {
     JobStatus.pending => JobStatusAppearance(
-        label: 'Pending',
-        icon: Icons.schedule_outlined,
-        color: colorScheme.tertiary,
-      ),
+      label: 'Pending',
+      icon: Icons.schedule_outlined,
+      color: colorScheme.tertiary,
+    ),
     JobStatus.running => JobStatusAppearance(
-        label: 'Syncing',
-        icon: Icons.sync,
-        color: colorScheme.primary,
-      ),
+      label: 'Syncing',
+      icon: Icons.sync,
+      color: colorScheme.primary,
+    ),
     JobStatus.success => JobStatusAppearance(
-        label: 'Synced',
-        icon: Icons.check_circle_outline,
-        color: colorScheme.primary,
-      ),
+      label: 'Synced',
+      icon: Icons.check_circle_outline,
+      color: colorScheme.primary,
+    ),
     JobStatus.failed => JobStatusAppearance(
-        label: 'Failed',
-        icon: Icons.error_outline,
-        color: colorScheme.error,
-      ),
+      label: 'Failed',
+      icon: Icons.error_outline,
+      color: colorScheme.error,
+    ),
     JobStatus.conflict => JobStatusAppearance(
-        label: 'Conflict',
-        icon: Icons.warning_amber_outlined,
-        color: colorScheme.error,
-      ),
+      label: 'Conflict',
+      icon: Icons.warning_amber_outlined,
+      color: colorScheme.error,
+    ),
     JobStatus.cancelled => JobStatusAppearance(
-        label: 'Cancelled',
-        icon: Icons.cancel_outlined,
-        color: colorScheme.outline,
-      ),
+      label: 'Cancelled',
+      icon: Icons.cancel_outlined,
+      color: colorScheme.outline,
+    ),
   };
 }

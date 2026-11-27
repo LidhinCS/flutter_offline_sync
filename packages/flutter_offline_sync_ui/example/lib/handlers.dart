@@ -37,12 +37,16 @@ Future<void> enqueueCreatePostJob(
   required String title,
 }) {
   return JobBuilder(
-    db,
-    feature: 'posts',
-    screen: 'create_post_screen',
-    meta: {'label': 'Create "$title"'},
-  )
-      .addStep('uploadImage', taskType: 'uploadImage', input: {'filePath': filePath})
+        db,
+        feature: 'posts',
+        screen: 'create_post_screen',
+        meta: {'label': 'Create "$title"'},
+      )
+      .addStep(
+        'uploadImage',
+        taskType: 'uploadImage',
+        input: {'filePath': filePath},
+      )
       .addStep(
         'createPost',
         taskType: 'createPost',

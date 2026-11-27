@@ -16,10 +16,7 @@ void callbackDispatcher() {
 Future<PullCoordinator> createBackgroundPullCoordinator() async {
   final store = ExampleStore();
   final pullDb = PullDatabase();
-  return PullCoordinator(
-    db: pullDb,
-    registry: buildPullRegistry(store),
-  );
+  return PullCoordinator(db: pullDb, registry: buildPullRegistry(store));
 }
 
 Future<void> setupBackgroundPull() {

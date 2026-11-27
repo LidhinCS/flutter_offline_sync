@@ -7,10 +7,7 @@ import 'package:meta/meta.dart';
 /// Paths use dot notation for nested maps, e.g. `data.postId` or `body.parent.id`.
 @immutable
 class FieldMapping {
-  const FieldMapping({
-    required this.from,
-    required this.to,
-  });
+  const FieldMapping({required this.from, required this.to});
 
   /// Dot path in the upstream step's success [output] map.
   final String from;
@@ -21,10 +18,7 @@ class FieldMapping {
   Map<String, dynamic> toJson() => {'from': from, 'to': to};
 
   factory FieldMapping.fromJson(Map<String, dynamic> json) {
-    return FieldMapping(
-      from: json['from'] as String,
-      to: json['to'] as String,
-    );
+    return FieldMapping(from: json['from'] as String, to: json['to'] as String);
   }
 }
 
@@ -48,9 +42,9 @@ class CrossJobDependency {
     required this.stepKey,
     required this.mappings,
   }) : assert(
-          jobId != null || screen != null,
-          'Provide jobId or screen to identify the upstream job.',
-        );
+         jobId != null || screen != null,
+         'Provide jobId or screen to identify the upstream job.',
+       );
 
   /// Upstream job id, if known at enqueue time.
   final int? jobId;
@@ -69,12 +63,12 @@ class CrossJobDependency {
   final List<FieldMapping> mappings;
 
   Map<String, dynamic> toJson() => {
-        if (jobId != null) 'jobId': jobId,
-        if (screen != null) 'screen': screen,
-        if (feature != null) 'feature': feature,
-        'stepKey': stepKey,
-        'mappings': mappings.map((m) => m.toJson()).toList(),
-      };
+    if (jobId != null) 'jobId': jobId,
+    if (screen != null) 'screen': screen,
+    if (feature != null) 'feature': feature,
+    'stepKey': stepKey,
+    'mappings': mappings.map((m) => m.toJson()).toList(),
+  };
 
   factory CrossJobDependency.fromJson(Map<String, dynamic> json) {
     final rawMappings = json['mappings'] as List<dynamic>? ?? const [];

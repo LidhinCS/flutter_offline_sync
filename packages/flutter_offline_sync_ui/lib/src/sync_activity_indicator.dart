@@ -116,7 +116,11 @@ class _SyncActivityIndicatorState extends State<SyncActivityIndicator> {
                 color: colorScheme.primary,
               ),
             )
-          : Icon(Icons.cloud_done_outlined, size: 16, color: colorScheme.primary),
+          : Icon(
+              Icons.cloud_done_outlined,
+              size: 16,
+              color: colorScheme.primary,
+            ),
       label: Text(label),
       visualDensity: VisualDensity.compact,
       side: BorderSide(color: colorScheme.outlineVariant),
@@ -126,10 +130,7 @@ class _SyncActivityIndicatorState extends State<SyncActivityIndicator> {
 
 /// Combined snapshot of push + pull busy flags (foreground isolate).
 class SyncActivity {
-  const SyncActivity({
-    this.isPushing = false,
-    this.isPulling = false,
-  });
+  const SyncActivity({this.isPushing = false, this.isPulling = false});
 
   final bool isPushing;
   final bool isPulling;

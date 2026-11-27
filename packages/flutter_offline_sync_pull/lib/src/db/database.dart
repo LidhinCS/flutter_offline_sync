@@ -63,7 +63,9 @@ class PullDatabase extends _$PullDatabase {
       return;
     }
 
-    await (update(pullCheckpoints)..where((c) => c.id.equals(existing.id))).write(
+    await (update(
+      pullCheckpoints,
+    )..where((c) => c.id.equals(existing.id))).write(
       PullCheckpointsCompanion(
         page: Value(page),
         pageSize: Value(pageSize),

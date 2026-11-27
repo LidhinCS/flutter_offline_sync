@@ -40,9 +40,12 @@ class SyncContext {
 sealed class SyncStepResult {
   const SyncStepResult();
 
-  const factory SyncStepResult.success(Map<String, dynamic> output) = SyncStepSuccess;
-  const factory SyncStepResult.failure(String error, {bool retryable}) = SyncStepFailure;
-  const factory SyncStepResult.conflict(Map<String, dynamic> serverState) = SyncStepConflict;
+  const factory SyncStepResult.success(Map<String, dynamic> output) =
+      SyncStepSuccess;
+  const factory SyncStepResult.failure(String error, {bool retryable}) =
+      SyncStepFailure;
+  const factory SyncStepResult.conflict(Map<String, dynamic> serverState) =
+      SyncStepConflict;
 }
 
 final class SyncStepSuccess extends SyncStepResult {
@@ -80,7 +83,8 @@ abstract class SyncTaskHandler {
   /// presigned upload URL that expires). Defaults to always reusable,
   /// which is correct for durable outputs like a permanent imageUrl or a
   /// server-assigned id.
-  bool isOutputStillValid(Map<String, dynamic> output, DateTime completedAt) => true;
+  bool isOutputStillValid(Map<String, dynamic> output, DateTime completedAt) =>
+      true;
 }
 
 /// Simple in-memory registry mapping taskType -> handler. Register your

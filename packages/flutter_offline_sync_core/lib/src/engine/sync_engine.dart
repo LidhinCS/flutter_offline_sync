@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter_offline_sync_core/src/db/sync_jobs_table.dart' show JobStatus;
-import 'package:flutter_offline_sync_core/flutter_offline_sync_core.dart' show StepStatus;
+import 'package:flutter_offline_sync_core/src/db/sync_jobs_table.dart'
+    show JobStatus;
+import 'package:flutter_offline_sync_core/flutter_offline_sync_core.dart'
+    show StepStatus;
 
 import '../db/database.dart';
 import '../models/handler.dart';
@@ -20,10 +22,10 @@ class SyncEngine {
     required SyncDatabase db,
     required SyncHandlerRegistry registry,
     RetryPolicy retryPolicy = const RetryPolicy(),
-  })  : _db = db,
-        _registry = registry,
-        _retryPolicy = retryPolicy,
-        _crossJob = CrossJobResolver(db);
+  }) : _db = db,
+       _registry = registry,
+       _retryPolicy = retryPolicy,
+       _crossJob = CrossJobResolver(db);
 
   final SyncDatabase _db;
   final SyncHandlerRegistry _registry;
@@ -221,7 +223,10 @@ class SyncEngine {
   }
 
   Future<void> _runStep(
-      int jobId, SyncStep step, Map<String, SyncStep> byKey) async {
+    int jobId,
+    SyncStep step,
+    Map<String, SyncStep> byKey,
+  ) async {
     await _db.markStepRunning(step.id);
 
     final deps = (jsonDecode(step.dependsOn) as List).cast<String>();
@@ -232,9 +237,9 @@ class SyncEngine {
           jsonDecode(depStep.output!) as Map<String, dynamic>;
     }
 
-    final job = await (_db.select(_db.syncJobs)
-          ..where((j) => j.id.equals(jobId)))
-        .getSingle();
+    final job = await (_db.select(
+      _db.syncJobs,
+    )..where((j) => j.id.equals(jobId))).getSingle();
 
     final resolvedInput = await _crossJob.resolvedInput(step);
 
@@ -262,7 +267,10 @@ class SyncEngine {
   }
 
   Future<void> _handleFailure(
-      SyncStep step, String error, bool retryable) async {
+    SyncStep step,
+    String error,
+    bool retryable,
+  ) async {
     final nextAttempt = step.attempt + 1;
     if (retryable && _retryPolicy.shouldRetry(nextAttempt)) {
       final delay = _retryPolicy.delayFor(nextAttempt);
@@ -286,8 +294,10 @@ class SyncEngine {
       if (step.status == StepStatus.success) {
         final handler = _registry.resolve(step.taskType);
         final output = jsonDecode(step.output!) as Map<String, dynamic>;
-        final stillValid =
-            handler.isOutputStillValid(output, step.completedAt!);
+        final stillValid = handler.isOutputStillValid(
+          output,
+          step.completedAt!,
+        );
         if (!stillValid) {
           await _db.resetStepToPending(step.id);
         }

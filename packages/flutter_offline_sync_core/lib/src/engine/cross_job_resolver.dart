@@ -75,8 +75,7 @@ class CrossJobResolver {
         continue;
       }
 
-      final internalDeps =
-          (jsonDecode(step.dependsOn) as List).cast<String>();
+      final internalDeps = (jsonDecode(step.dependsOn) as List).cast<String>();
       final internalReady = internalDeps.every(
         (dep) => byKey[dep]?.status == StepStatus.success,
       );

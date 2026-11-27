@@ -11,8 +11,8 @@ class PullCoordinator {
   PullCoordinator({
     required PullDatabase db,
     required PullFeatureRegistry registry,
-  })  : _db = db,
-        _registry = registry;
+  }) : _db = db,
+       _registry = registry;
 
   final PullDatabase _db;
   final PullFeatureRegistry _registry;

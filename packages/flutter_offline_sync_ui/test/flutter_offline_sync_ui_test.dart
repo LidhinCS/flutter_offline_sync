@@ -29,7 +29,10 @@ void main() {
       );
 
       expect(jobDisplayLabel(job), 'Upload photo');
-      expect(jobDisplayLabel(_job(id: 2, status: JobStatus.pending)), 'Sync job');
+      expect(
+        jobDisplayLabel(_job(id: 2, status: JobStatus.pending)),
+        'Sync job',
+      );
     });
 
     test('activeJobs hides success and cancelled', () {
@@ -94,7 +97,9 @@ void main() {
       expect(find.text('Retry'), findsOneWidget);
     });
 
-    testWidgets('SyncStatusBadge renders pending label from job list', (tester) async {
+    testWidgets('SyncStatusBadge renders pending label from job list', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -114,9 +119,7 @@ void main() {
         db,
         feature: 'posts',
         screen: 'create_post_screen',
-      )
-          .addStep('upload', taskType: 'uploadImage', input: const {})
-          .enqueue();
+      ).addStep('upload', taskType: 'uploadImage', input: const {}).enqueue();
 
       await tester.pump();
       expect(find.text('1 pending'), findsOneWidget);
@@ -128,11 +131,7 @@ void main() {
   });
 }
 
-SyncJob _job({
-  required int id,
-  required JobStatus status,
-  String? meta,
-}) {
+SyncJob _job({required int id, required JobStatus status, String? meta}) {
   return SyncJob(
     id: id,
     feature: 'f',

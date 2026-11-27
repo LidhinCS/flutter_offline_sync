@@ -29,7 +29,10 @@ class SyncJobListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
-    final appearance = jobStatusAppearance(job.status, colorScheme: colorScheme);
+    final appearance = jobStatusAppearance(
+      job.status,
+      colorScheme: colorScheme,
+    );
     final statusText = switch (job.status) {
       JobStatus.pending => 'Waiting for connectivity',
       JobStatus.running => 'Sync in progress',
@@ -59,9 +62,7 @@ class SyncJobListTile extends StatelessWidget {
           ],
           Text(
             statusText,
-            style: textTheme.bodySmall?.copyWith(
-              color: appearance.color,
-            ),
+            style: textTheme.bodySmall?.copyWith(color: appearance.color),
           ),
         ],
       ),
@@ -74,12 +75,12 @@ class SyncJobListTile extends StatelessWidget {
   Widget? _trailing(BuildContext context) {
     return switch (job.status) {
       JobStatus.failed => TextButton(
-          onPressed: () async {
-            await engine.retryJob(job.id);
-            onRetried?.call();
-          },
-          child: const Text('Retry'),
-        ),
+        onPressed: () async {
+          await engine.retryJob(job.id);
+          onRetried?.call();
+        },
+        child: const Text('Retry'),
+      ),
       JobStatus.conflict => const Icon(Icons.chevron_right),
       _ => null,
     };

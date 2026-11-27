@@ -44,8 +44,9 @@ class SyncScreenBanner extends StatelessWidget {
         final counts = countJobs(visible);
         final colorScheme = Theme.of(context).colorScheme;
         final message = _bannerMessage(counts);
-        final accentColor =
-            counts.hasNeedsAttention ? colorScheme.error : colorScheme.primary;
+        final accentColor = counts.hasNeedsAttention
+            ? colorScheme.error
+            : colorScheme.primary;
 
         return Card(
           margin: const EdgeInsets.fromLTRB(16, 8, 16, 0),

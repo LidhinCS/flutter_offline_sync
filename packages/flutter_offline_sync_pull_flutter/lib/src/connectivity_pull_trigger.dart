@@ -6,11 +6,10 @@ import 'package:flutter_offline_sync_pull/flutter_offline_sync_pull.dart';
 /// Foreground trigger: pull when connectivity returns instead of waiting for
 /// the next WorkManager window.
 class ConnectivityPullTrigger {
-  ConnectivityPullTrigger(
-    this.coordinator, {
-    Connectivity? connectivity,
-  }) : _connectivityStream =
-            connectivity?.onConnectivityChanged ?? Connectivity().onConnectivityChanged;
+  ConnectivityPullTrigger(this.coordinator, {Connectivity? connectivity})
+    : _connectivityStream =
+          connectivity?.onConnectivityChanged ??
+          Connectivity().onConnectivityChanged;
 
   ConnectivityPullTrigger.forTesting(
     this.coordinator,

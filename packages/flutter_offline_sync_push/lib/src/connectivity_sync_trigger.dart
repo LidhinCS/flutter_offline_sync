@@ -6,18 +6,16 @@ import 'package:flutter_offline_sync_core/flutter_offline_sync_core.dart';
 /// Foreground trigger: sync immediately when connectivity returns, rather than
 /// waiting for the next WorkManager window.
 class ConnectivitySyncTrigger {
-  ConnectivitySyncTrigger(
-    this.engine, {
-    Connectivity? connectivity,
-  })  : _connectivity = connectivity ?? Connectivity(),
-        _connectivityStream = null;
+  ConnectivitySyncTrigger(this.engine, {Connectivity? connectivity})
+    : _connectivity = connectivity ?? Connectivity(),
+      _connectivityStream = null;
 
   /// Test-only constructor with a custom connectivity stream.
   ConnectivitySyncTrigger.forTesting(
     this.engine,
     Stream<List<ConnectivityResult>> connectivityStream,
-  )   : _connectivity = null,
-        _connectivityStream = connectivityStream;
+  ) : _connectivity = null,
+      _connectivityStream = connectivityStream;
 
   final SyncEngine engine;
   final Connectivity? _connectivity;
@@ -31,8 +29,7 @@ class ConnectivitySyncTrigger {
   void start() {
     if (_subscription != null) return;
 
-    final stream =
-        _connectivityStream ?? _connectivity!.onConnectivityChanged;
+    final stream = _connectivityStream ?? _connectivity!.onConnectivityChanged;
     _subscription = stream.listen(_onConnectivityChanged);
 
     // Stream events are only for *changes*. Probe current state so an

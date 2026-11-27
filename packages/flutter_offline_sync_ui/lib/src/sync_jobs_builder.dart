@@ -10,9 +10,9 @@ class SyncJobsBuilder extends StatelessWidget {
     this.screen,
     this.feature,
   }) : assert(
-          screen != null || feature != null,
-          'Provide either screen or feature.',
-        );
+         screen != null || feature != null,
+         'Provide either screen or feature.',
+       );
 
   final SyncDatabase db;
   final String? screen;

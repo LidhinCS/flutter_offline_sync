@@ -14,7 +14,8 @@ class OfflineSyncScope extends InheritedWidget {
   final SyncEngine engine;
 
   static OfflineSyncScope of(BuildContext context) {
-    final scope = context.dependOnInheritedWidgetOfExactType<OfflineSyncScope>();
+    final scope = context
+        .dependOnInheritedWidgetOfExactType<OfflineSyncScope>();
     assert(
       scope != null,
       'OfflineSyncScope not found. Wrap your app (or screen) with OfflineSyncScope.',

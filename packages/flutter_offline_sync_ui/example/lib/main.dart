@@ -31,7 +31,9 @@ class OfflineSyncUiExampleApp extends StatelessWidget {
       engine: engine,
       child: MaterialApp(
         title: 'flutter_offline_sync_ui example',
-        theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)),
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        ),
         home: const UiDemoScreen(),
       ),
     );
@@ -89,8 +91,10 @@ class UiDemoScreen extends StatelessWidget {
                       label: const Text('Enqueue job'),
                     ),
                     const SizedBox(height: 24),
-                    Text('All jobs (${jobs.length})',
-                        style: Theme.of(context).textTheme.titleMedium),
+                    Text(
+                      'All jobs (${jobs.length})',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
                     const SizedBox(height: 8),
                     if (jobs.isEmpty)
                       const Text('No jobs yet.')

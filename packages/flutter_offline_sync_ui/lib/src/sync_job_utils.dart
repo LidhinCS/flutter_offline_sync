@@ -116,14 +116,15 @@ List<SyncJob> activeJobs(Iterable<SyncJob> jobs) {
 /// separate history DB unless you need to prune the outbox and keep a thinner
 /// audit log.
 List<SyncJob> historyJobs(Iterable<SyncJob> jobs, {int limit = 50}) {
-  final completed = jobs
-      .where(
-        (job) =>
-            job.status == JobStatus.success ||
-            job.status == JobStatus.cancelled,
-      )
-      .toList()
-    ..sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
+  final completed =
+      jobs
+          .where(
+            (job) =>
+                job.status == JobStatus.success ||
+                job.status == JobStatus.cancelled,
+          )
+          .toList()
+        ..sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
   if (completed.length <= limit) return completed;
   return completed.sublist(0, limit);
 }

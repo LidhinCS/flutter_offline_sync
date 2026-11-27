@@ -41,11 +41,16 @@ void main() {
         ..register('task', _CountingHandler(() => syncHandlerCalls++));
       final engine = SyncEngine(db: db, registry: registry);
 
-      await JobBuilder(db, feature: 'f', screen: 's')
-          .addStep('step', taskType: 'task', input: const {})
-          .enqueue();
+      await JobBuilder(
+        db,
+        feature: 'f',
+        screen: 's',
+      ).addStep('step', taskType: 'task', input: const {}).enqueue();
 
-      final trigger = ConnectivitySyncTrigger.forTesting(engine, connectivity.stream);
+      final trigger = ConnectivitySyncTrigger.forTesting(
+        engine,
+        connectivity.stream,
+      );
       trigger.start();
 
       connectivity.add([ConnectivityResult.none]);
@@ -60,11 +65,16 @@ void main() {
         ..register('task', _CountingHandler(() => syncHandlerCalls++));
       final engine = SyncEngine(db: db, registry: registry);
 
-      await JobBuilder(db, feature: 'f', screen: 's')
-          .addStep('step', taskType: 'task', input: const {})
-          .enqueue();
+      await JobBuilder(
+        db,
+        feature: 'f',
+        screen: 's',
+      ).addStep('step', taskType: 'task', input: const {}).enqueue();
 
-      final trigger = ConnectivitySyncTrigger.forTesting(engine, connectivity.stream);
+      final trigger = ConnectivitySyncTrigger.forTesting(
+        engine,
+        connectivity.stream,
+      );
       trigger.start();
 
       connectivity.add([ConnectivityResult.wifi]);
@@ -84,9 +94,11 @@ void main() {
       final registry = SyncHandlerRegistry()
         ..register('task', _CountingHandler(() => handlerCalls++));
 
-      await JobBuilder(db, feature: 'f', screen: 's')
-          .addStep('step', taskType: 'task', input: const {})
-          .enqueue();
+      await JobBuilder(
+        db,
+        feature: 'f',
+        screen: 's',
+      ).addStep('step', taskType: 'task', input: const {}).enqueue();
 
       final result = await runBackgroundSync(() async {
         return SyncEngine(db: db, registry: registry);
@@ -98,37 +110,40 @@ void main() {
   });
 
   group('FlutterSyncCoordinator', () {
-    test('recovers interrupted work and drains pending jobs on start', () async {
-      final db = SyncDatabase.forTesting(NativeDatabase.memory());
-      addTearDown(db.close);
+    test(
+      'recovers interrupted work and drains pending jobs on start',
+      () async {
+        final db = SyncDatabase.forTesting(NativeDatabase.memory());
+        addTearDown(db.close);
 
-      final jobId = await db.createJob(
-        feature: 'f',
-        screen: 's',
-        idempotencyKey: 'key',
-      );
-      await db.addStep(
-        jobId: jobId,
-        stepKey: 'step',
-        taskType: 'task',
-        input: const {},
-      );
-      await db.markJobStatus(jobId, JobStatus.running);
-      await db.markStepRunning(1);
+        final jobId = await db.createJob(
+          feature: 'f',
+          screen: 's',
+          idempotencyKey: 'key',
+        );
+        await db.addStep(
+          jobId: jobId,
+          stepKey: 'step',
+          taskType: 'task',
+          input: const {},
+        );
+        await db.markJobStatus(jobId, JobStatus.running);
+        await db.markStepRunning(1);
 
-      var handlerCalls = 0;
-      final registry = SyncHandlerRegistry()
-        ..register('task', _CountingHandler(() => handlerCalls++));
-      final engine = SyncEngine(db: db, registry: registry);
-      final coordinator = FlutterSyncCoordinator(engine: engine);
+        var handlerCalls = 0;
+        final registry = SyncHandlerRegistry()
+          ..register('task', _CountingHandler(() => handlerCalls++));
+        final engine = SyncEngine(db: db, registry: registry);
+        final coordinator = FlutterSyncCoordinator(engine: engine);
 
-      await coordinator.startForegroundSync();
+        await coordinator.startForegroundSync();
 
-      final job = await db.jobById(jobId);
-      expect(job?.status, JobStatus.success);
-      expect(handlerCalls, 1);
+        final job = await db.jobById(jobId);
+        expect(job?.status, JobStatus.success);
+        expect(handlerCalls, 1);
 
-      await coordinator.stopForegroundSync();
-    });
+        await coordinator.stopForegroundSync();
+      },
+    );
   });
 }

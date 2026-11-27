@@ -30,7 +30,9 @@ class OfflineSyncCoreExampleApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'flutter_offline_sync_core example',
-      theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo)),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
+      ),
       home: CreatePostDemoScreen(db: db, engine: engine),
     );
   }
@@ -84,8 +86,10 @@ class CreatePostDemoScreen extends StatelessWidget {
                 label: const Text('Enqueue create-post job'),
               ),
               const SizedBox(height: 24),
-              Text('Jobs on this screen (${jobs.length})',
-                  style: Theme.of(context).textTheme.titleMedium),
+              Text(
+                'Jobs on this screen (${jobs.length})',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
               const SizedBox(height: 8),
               if (jobs.isEmpty)
                 const Text('No jobs yet.')

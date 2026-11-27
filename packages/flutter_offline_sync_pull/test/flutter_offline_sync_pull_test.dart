@@ -69,11 +69,7 @@ void main() {
           name: 'documents',
           maxPagesPerRun: 1,
           steps: [
-            PaginatedListPullStep(
-              key: 'list',
-              pageSize: 2,
-              handler: handler,
-            ),
+            PaginatedListPullStep(key: 'list', pageSize: 2, handler: handler),
           ],
         ),
       );

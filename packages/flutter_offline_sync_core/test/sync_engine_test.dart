@@ -46,33 +46,54 @@ void main() {
   });
 
   test('dependent steps: downstream sees upstream output', () async {
-    final upload = FakeHandler(outputBuilder: (_) => {'imageUrl': 'https://x/1.png'});
+    final upload = FakeHandler(
+      outputBuilder: (_) => {'imageUrl': 'https://x/1.png'},
+    );
     late String receivedUrl;
-    final create = FakeHandler(outputBuilder: (ctx) {
-      receivedUrl = ctx.dependencyOutput('uploadImage')['imageUrl'] as String;
-      return {'postId': 42};
-    });
+    final create = FakeHandler(
+      outputBuilder: (ctx) {
+        receivedUrl = ctx.dependencyOutput('uploadImage')['imageUrl'] as String;
+        return {'postId': 42};
+      },
+    );
 
     final registry = SyncHandlerRegistry()
       ..register('uploadImage', upload)
       ..register('createPost', create);
 
-    final jobId = await JobBuilder(db, feature: 'posts', screen: 'create_post_screen')
-        .addStep('uploadImage', taskType: 'uploadImage', input: {'filePath': '/tmp/a.png'})
-        .addStep('createPost', taskType: 'createPost', input: {'title': 'hi'}, dependsOn: ['uploadImage'])
-        .enqueue();
+    final jobId =
+        await JobBuilder(db, feature: 'posts', screen: 'create_post_screen')
+            .addStep(
+              'uploadImage',
+              taskType: 'uploadImage',
+              input: {'filePath': '/tmp/a.png'},
+            )
+            .addStep(
+              'createPost',
+              taskType: 'createPost',
+              input: {'title': 'hi'},
+              dependsOn: ['uploadImage'],
+            )
+            .enqueue();
 
     final engine = SyncEngine(db: db, registry: registry);
     await engine.runJob(jobId);
 
     expect(receivedUrl, 'https://x/1.png');
-    final job = await (db.select(db.syncJobs)..where((j) => j.id.equals(jobId))).getSingle();
+    final job = await (db.select(
+      db.syncJobs,
+    )..where((j) => j.id.equals(jobId))).getSingle();
     expect(job.status, JobStatus.success);
   });
 
   test('partial retry: successful step is not re-executed', () async {
-    final upload = FakeHandler(outputBuilder: (_) => {'imageUrl': 'https://x/1.png'});
-    final create = FakeHandler(failUntilAttempt: 1, outputBuilder: (_) => {'postId': 1});
+    final upload = FakeHandler(
+      outputBuilder: (_) => {'imageUrl': 'https://x/1.png'},
+    );
+    final create = FakeHandler(
+      failUntilAttempt: 1,
+      outputBuilder: (_) => {'postId': 1},
+    );
 
     final registry = SyncHandlerRegistry()
       ..register('uploadImage', upload)
@@ -80,74 +101,116 @@ void main() {
 
     final jobId = await JobBuilder(db, feature: 'posts', screen: 's')
         .addStep('uploadImage', taskType: 'uploadImage', input: {})
-        .addStep('createPost', taskType: 'createPost', input: {}, dependsOn: ['uploadImage'])
+        .addStep(
+          'createPost',
+          taskType: 'createPost',
+          input: {},
+          dependsOn: ['uploadImage'],
+        )
         .enqueue();
 
     final engine = SyncEngine(
       db: db,
       registry: registry,
       // Avoid backoff delay so the auto-retry path in syncAll is deterministic.
-      retryPolicy: const RetryPolicy(baseDelay: Duration.zero, jitterFraction: 0),
+      retryPolicy: const RetryPolicy(
+        baseDelay: Duration.zero,
+        jitterFraction: 0,
+      ),
     );
     await engine.runJob(jobId); // createPost fails once here
-    var job = await (db.select(db.syncJobs)..where((j) => j.id.equals(jobId))).getSingle();
+    var job = await (db.select(
+      db.syncJobs,
+    )..where((j) => j.id.equals(jobId))).getSingle();
     expect(job.status, JobStatus.failed);
     expect(upload.calls, 1);
 
     await engine.retryJob(jobId); // should NOT re-run uploadImage
-    job = await (db.select(db.syncJobs)..where((j) => j.id.equals(jobId))).getSingle();
+    job = await (db.select(
+      db.syncJobs,
+    )..where((j) => j.id.equals(jobId))).getSingle();
     expect(job.status, JobStatus.success);
-    expect(upload.calls, 1, reason: 'successful step must be reused, not re-executed');
+    expect(
+      upload.calls,
+      1,
+      reason: 'successful step must be reused, not re-executed',
+    );
     expect(create.calls, 2);
   });
 
-  test('syncAll auto-retries retryable failed jobs without manual retryJob', () async {
-    final handler = FakeHandler(failUntilAttempt: 1, outputBuilder: (_) => {'ok': true});
-    final registry = SyncHandlerRegistry()..register('task', handler);
-    final engine = SyncEngine(
-      db: db,
-      registry: registry,
-      retryPolicy: const RetryPolicy(baseDelay: Duration.zero, jitterFraction: 0),
-    );
+  test(
+    'syncAll auto-retries retryable failed jobs without manual retryJob',
+    () async {
+      final handler = FakeHandler(
+        failUntilAttempt: 1,
+        outputBuilder: (_) => {'ok': true},
+      );
+      final registry = SyncHandlerRegistry()..register('task', handler);
+      final engine = SyncEngine(
+        db: db,
+        registry: registry,
+        retryPolicy: const RetryPolicy(
+          baseDelay: Duration.zero,
+          jitterFraction: 0,
+        ),
+      );
 
-    final jobId = await JobBuilder(db, feature: 'f', screen: 's')
-        .addStep('step', taskType: 'task', input: {})
-        .enqueue();
+      final jobId = await JobBuilder(
+        db,
+        feature: 'f',
+        screen: 's',
+      ).addStep('step', taskType: 'task', input: {}).enqueue();
 
-    await engine.runJob(jobId);
-    var job =
-        await (db.select(db.syncJobs)..where((j) => j.id.equals(jobId))).getSingle();
-    expect(job.status, JobStatus.failed);
-    expect(handler.calls, 1);
+      await engine.runJob(jobId);
+      var job = await (db.select(
+        db.syncJobs,
+      )..where((j) => j.id.equals(jobId))).getSingle();
+      expect(job.status, JobStatus.failed);
+      expect(handler.calls, 1);
 
-    // Reconnect / next sync pass should requeue and succeed.
-    await engine.syncAll();
-    job = await (db.select(db.syncJobs)..where((j) => j.id.equals(jobId))).getSingle();
-    expect(job.status, JobStatus.success);
-    expect(handler.calls, 2);
-  });
+      // Reconnect / next sync pass should requeue and succeed.
+      await engine.syncAll();
+      job = await (db.select(
+        db.syncJobs,
+      )..where((j) => j.id.equals(jobId))).getSingle();
+      expect(job.status, JobStatus.success);
+      expect(handler.calls, 2);
+    },
+  );
 
   test('syncAll does not auto-retry non-retryable failures', () async {
     final registry = SyncHandlerRegistry()
       ..register('task', _NonRetryableFailHandler());
     final engine = SyncEngine(db: db, registry: registry);
 
-    final jobId = await JobBuilder(db, feature: 'f', screen: 's')
-        .addStep('step', taskType: 'task', input: {})
-        .enqueue();
+    final jobId = await JobBuilder(
+      db,
+      feature: 'f',
+      screen: 's',
+    ).addStep('step', taskType: 'task', input: {}).enqueue();
 
     await engine.runJob(jobId);
-    var job =
-        await (db.select(db.syncJobs)..where((j) => j.id.equals(jobId))).getSingle();
+    var job = await (db.select(
+      db.syncJobs,
+    )..where((j) => j.id.equals(jobId))).getSingle();
     expect(job.status, JobStatus.failed);
 
     await engine.syncAll();
-    job = await (db.select(db.syncJobs)..where((j) => j.id.equals(jobId))).getSingle();
-    expect(job.status, JobStatus.failed, reason: 'non-retryable must stay failed');
+    job = await (db.select(
+      db.syncJobs,
+    )..where((j) => j.id.equals(jobId))).getSingle();
+    expect(
+      job.status,
+      JobStatus.failed,
+      reason: 'non-retryable must stay failed',
+    );
   });
 
   test('conflict halts the job and does not run downstream steps', () async {
-    final create = FakeHandler(conflictOnce: true, outputBuilder: (_) => {'postId': 1});
+    final create = FakeHandler(
+      conflictOnce: true,
+      outputBuilder: (_) => {'postId': 1},
+    );
     final notify = FakeHandler(outputBuilder: (_) => {'notified': true});
 
     final registry = SyncHandlerRegistry()
@@ -156,118 +219,169 @@ void main() {
 
     final jobId = await JobBuilder(db, feature: 'posts', screen: 's')
         .addStep('createPost', taskType: 'createPost', input: {})
-        .addStep('notify', taskType: 'notify', input: {}, dependsOn: ['createPost'])
+        .addStep(
+          'notify',
+          taskType: 'notify',
+          input: {},
+          dependsOn: ['createPost'],
+        )
         .enqueue();
 
     final engine = SyncEngine(db: db, registry: registry);
     await engine.runJob(jobId);
 
-    var job = await (db.select(db.syncJobs)..where((j) => j.id.equals(jobId))).getSingle();
+    var job = await (db.select(
+      db.syncJobs,
+    )..where((j) => j.id.equals(jobId))).getSingle();
     expect(job.status, JobStatus.conflict);
-    expect(notify.calls, 0, reason: 'downstream step must not run while upstream is conflicted');
+    expect(
+      notify.calls,
+      0,
+      reason: 'downstream step must not run while upstream is conflicted',
+    );
 
     await engine.resolveConflict(jobId, 'createPost', {'postId': 1});
-    job = await (db.select(db.syncJobs)..where((j) => j.id.equals(jobId))).getSingle();
+    job = await (db.select(
+      db.syncJobs,
+    )..where((j) => j.id.equals(jobId))).getSingle();
     expect(job.status, JobStatus.success);
     expect(notify.calls, 1);
   });
 
-  test('recovery resets steps/jobs stuck in running after a simulated restart', () async {
-    final handler = FakeHandler(outputBuilder: (_) => {'ok': true});
-    final registry = SyncHandlerRegistry()..register('task', handler);
+  test(
+    'recovery resets steps/jobs stuck in running after a simulated restart',
+    () async {
+      final handler = FakeHandler(outputBuilder: (_) => {'ok': true});
+      final registry = SyncHandlerRegistry()..register('task', handler);
 
-    final jobId = await JobBuilder(db, feature: 'f', screen: 's')
-        .addStep('step1', taskType: 'task', input: {})
-        .enqueue();
+      final jobId = await JobBuilder(
+        db,
+        feature: 'f',
+        screen: 's',
+      ).addStep('step1', taskType: 'task', input: {}).enqueue();
 
-    // Simulate the app being killed mid-execute: step and job left `running`
-    // with no live runJob() call actually awaiting them.
-    final steps = await db.stepsForJob(jobId);
-    await db.markStepRunning(steps.first.id);
-    await db.markJobStatus(jobId, JobStatus.running);
+      // Simulate the app being killed mid-execute: step and job left `running`
+      // with no live runJob() call actually awaiting them.
+      final steps = await db.stepsForJob(jobId);
+      await db.markStepRunning(steps.first.id);
+      await db.markJobStatus(jobId, JobStatus.running);
 
-    final engine = SyncEngine(db: db, registry: registry);
-    await engine.recoverInterruptedWork();
+      final engine = SyncEngine(db: db, registry: registry);
+      await engine.recoverInterruptedWork();
 
-    final step = (await db.stepsForJob(jobId)).first;
-    expect(step.status, StepStatus.pending, reason: 'stuck running step must be recovered to pending');
-    final job = await (db.select(db.syncJobs)..where((j) => j.id.equals(jobId))).getSingle();
-    expect(job.status, JobStatus.pending, reason: 'stuck running job must be recovered to pending');
+      final step = (await db.stepsForJob(jobId)).first;
+      expect(
+        step.status,
+        StepStatus.pending,
+        reason: 'stuck running step must be recovered to pending',
+      );
+      final job = await (db.select(
+        db.syncJobs,
+      )..where((j) => j.id.equals(jobId))).getSingle();
+      expect(
+        job.status,
+        JobStatus.pending,
+        reason: 'stuck running job must be recovered to pending',
+      );
 
-    // And recovery should let it actually complete on the next real pass.
-    await engine.syncAll();
-    final finalJob = await (db.select(db.syncJobs)..where((j) => j.id.equals(jobId))).getSingle();
-    expect(finalJob.status, JobStatus.success);
-  });
+      // And recovery should let it actually complete on the next real pass.
+      await engine.syncAll();
+      final finalJob = await (db.select(
+        db.syncJobs,
+      )..where((j) => j.id.equals(jobId))).getSingle();
+      expect(finalJob.status, JobStatus.success);
+    },
+  );
 
-  test('cross-job dependency: screen Y waits for screen X and receives mapped id', () async {
-    final submitX = FakeHandler(outputBuilder: (_) => {'id': 99, 'name': 'parent'});
-    late int receivedParentId;
-    final submitY = FakeHandler(outputBuilder: (ctx) {
-      receivedParentId = ctx.input['parentId'] as int;
-      return {'childId': 7};
-    });
+  test(
+    'cross-job dependency: screen Y waits for screen X and receives mapped id',
+    () async {
+      final submitX = FakeHandler(
+        outputBuilder: (_) => {'id': 99, 'name': 'parent'},
+      );
+      late int receivedParentId;
+      final submitY = FakeHandler(
+        outputBuilder: (ctx) {
+          receivedParentId = ctx.input['parentId'] as int;
+          return {'childId': 7};
+        },
+      );
 
-    final registry = SyncHandlerRegistry()
-      ..register('submitX', submitX)
-      ..register('submitY', submitY);
+      final registry = SyncHandlerRegistry()
+        ..register('submitX', submitX)
+        ..register('submitY', submitY);
 
-    final engine = SyncEngine(db: db, registry: registry);
+      final engine = SyncEngine(db: db, registry: registry);
 
-    final parentJobId = await JobBuilder(db, feature: 'forms', screen: 'screen_x')
-        .addStep('submitX', taskType: 'submitX', input: {'name': 'parent'})
-        .enqueue();
+      final parentJobId =
+          await JobBuilder(db, feature: 'forms', screen: 'screen_x')
+              .addStep(
+                'submitX',
+                taskType: 'submitX',
+                input: {'name': 'parent'},
+              )
+              .enqueue();
 
-    final childJobId = await JobBuilder(db, feature: 'forms', screen: 'screen_y')
-        .addStep(
-          'submitY',
-          taskType: 'submitY',
-          input: {'title': 'child'},
-          externalDependsOn: [
-            CrossJobDependency(
-              jobId: parentJobId,
-              stepKey: 'submitX',
-              mappings: [FieldMapping(from: 'id', to: 'parentId')],
-            ),
-          ],
-        )
-        .enqueue();
+      final childJobId =
+          await JobBuilder(db, feature: 'forms', screen: 'screen_y')
+              .addStep(
+                'submitY',
+                taskType: 'submitY',
+                input: {'title': 'child'},
+                externalDependsOn: [
+                  CrossJobDependency(
+                    jobId: parentJobId,
+                    stepKey: 'submitX',
+                    mappings: [FieldMapping(from: 'id', to: 'parentId')],
+                  ),
+                ],
+              )
+              .enqueue();
 
-    // Child alone cannot run before parent succeeds.
-    await engine.runJob(childJobId);
-    var childJob =
-        await (db.select(db.syncJobs)..where((j) => j.id.equals(childJobId))).getSingle();
-    expect(childJob.status, JobStatus.pending);
-    expect(submitY.calls, 0);
+      // Child alone cannot run before parent succeeds.
+      await engine.runJob(childJobId);
+      var childJob = await (db.select(
+        db.syncJobs,
+      )..where((j) => j.id.equals(childJobId))).getSingle();
+      expect(childJob.status, JobStatus.pending);
+      expect(submitY.calls, 0);
 
-    await engine.syncAll();
+      await engine.syncAll();
 
-    expect(submitX.calls, 1);
-    expect(submitY.calls, 1);
-    expect(receivedParentId, 99);
+      expect(submitX.calls, 1);
+      expect(submitY.calls, 1);
+      expect(receivedParentId, 99);
 
-    childJob =
-        await (db.select(db.syncJobs)..where((j) => j.id.equals(childJobId))).getSingle();
-    expect(childJob.status, JobStatus.success);
-  });
+      childJob = await (db.select(
+        db.syncJobs,
+      )..where((j) => j.id.equals(childJobId))).getSingle();
+      expect(childJob.status, JobStatus.success);
+    },
+  );
 
   test('cross-job dependency: nested field mapping', () async {
     final submitX = FakeHandler(
-      outputBuilder: (_) => {'data': {'postId': 42}},
+      outputBuilder: (_) => {
+        'data': {'postId': 42},
+      },
     );
     late int receivedId;
-    final submitY = FakeHandler(outputBuilder: (ctx) {
-      receivedId = ctx.input['body']['postId'] as int;
-      return {'ok': true};
-    });
+    final submitY = FakeHandler(
+      outputBuilder: (ctx) {
+        receivedId = ctx.input['body']['postId'] as int;
+        return {'ok': true};
+      },
+    );
 
     final registry = SyncHandlerRegistry()
       ..register('submitX', submitX)
       ..register('submitY', submitY);
 
-    final parentJobId = await JobBuilder(db, feature: 'f', screen: 'x')
-        .addStep('submitX', taskType: 'submitX', input: {})
-        .enqueue();
+    final parentJobId = await JobBuilder(
+      db,
+      feature: 'f',
+      screen: 'x',
+    ).addStep('submitX', taskType: 'submitX', input: {}).enqueue();
 
     await JobBuilder(db, feature: 'f', screen: 'y')
         .addStep(
@@ -288,34 +402,50 @@ void main() {
     expect(receivedId, 42);
   });
 
-  test('a syncAll() call arriving mid-drain coalesces into one more pass instead of being dropped', () async {
-    // A handler that blocks until we release it, so we can deterministically
-    // call syncAll() again *while* the first pass is still draining.
-    final gate = Completer<void>();
-    var callCount = 0;
-    final registry = SyncHandlerRegistry()
-      ..register('slow', _GatedHandler(gate: gate, onCall: () => callCount++));
+  test(
+    'a syncAll() call arriving mid-drain coalesces into one more pass instead of being dropped',
+    () async {
+      // A handler that blocks until we release it, so we can deterministically
+      // call syncAll() again *while* the first pass is still draining.
+      final gate = Completer<void>();
+      var callCount = 0;
+      final registry = SyncHandlerRegistry()
+        ..register(
+          'slow',
+          _GatedHandler(gate: gate, onCall: () => callCount++),
+        );
 
-    final jobId = await JobBuilder(db, feature: 'f', screen: 's')
-        .addStep('step1', taskType: 'slow', input: {})
-        .enqueue();
+      final jobId = await JobBuilder(
+        db,
+        feature: 'f',
+        screen: 's',
+      ).addStep('step1', taskType: 'slow', input: {}).enqueue();
 
-    final engine = SyncEngine(db: db, registry: registry);
+      final engine = SyncEngine(db: db, registry: registry);
 
-    final firstPass = engine.syncAll();
-    await Future<void>.delayed(Duration.zero); // let the first pass start draining
+      final firstPass = engine.syncAll();
+      await Future<void>.delayed(
+        Duration.zero,
+      ); // let the first pass start draining
 
-    // This second call should coalesce (set _rerunRequested) rather than
-    // being dropped, since the first pass hasn't released the gate yet.
-    final secondPass = engine.syncAll();
+      // This second call should coalesce (set _rerunRequested) rather than
+      // being dropped, since the first pass hasn't released the gate yet.
+      final secondPass = engine.syncAll();
 
-    gate.complete();
-    await Future.wait([firstPass, secondPass]);
+      gate.complete();
+      await Future.wait([firstPass, secondPass]);
 
-    final job = await (db.select(db.syncJobs)..where((j) => j.id.equals(jobId))).getSingle();
-    expect(job.status, JobStatus.success);
-    expect(callCount, 1, reason: 'job should complete once, not run twice concurrently');
-  });
+      final job = await (db.select(
+        db.syncJobs,
+      )..where((j) => j.id.equals(jobId))).getSingle();
+      expect(job.status, JobStatus.success);
+      expect(
+        callCount,
+        1,
+        reason: 'job should complete once, not run twice concurrently',
+      );
+    },
+  );
 }
 
 /// Handler that awaits an external gate before resolving -- lets a test hold

@@ -49,8 +49,8 @@ class JobBuilder {
     required this.screen,
     Map<String, dynamic>? meta,
     String? idempotencyKey,
-  })  : _meta = meta,
-        _idempotencyKey = idempotencyKey ?? const Uuid().v4();
+  }) : _meta = meta,
+       _idempotencyKey = idempotencyKey ?? const Uuid().v4();
 
   final SyncDatabase _db;
   final String feature;
@@ -76,13 +76,15 @@ class JobBuilder {
         );
       }
     }
-    _steps.add(_PendingStep(
-      stepKey: stepKey,
-      taskType: taskType,
-      input: input,
-      dependsOn: dependsOn,
-      externalDependsOn: externalDependsOn,
-    ));
+    _steps.add(
+      _PendingStep(
+        stepKey: stepKey,
+        taskType: taskType,
+        input: input,
+        dependsOn: dependsOn,
+        externalDependsOn: externalDependsOn,
+      ),
+    );
     return this;
   }
 

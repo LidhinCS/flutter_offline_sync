@@ -74,7 +74,9 @@ void main() {
   group('FlutterPullCoordinator', () {
     test('start and stop without error', () async {
       final coordinator = _coordinator(onFetch: () {});
-      final flutterCoordinator = FlutterPullCoordinator(coordinator: coordinator);
+      final flutterCoordinator = FlutterPullCoordinator(
+        coordinator: coordinator,
+      );
 
       await flutterCoordinator.startForegroundPull();
       await flutterCoordinator.stopForegroundPull();

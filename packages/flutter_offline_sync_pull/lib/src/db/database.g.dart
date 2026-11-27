@@ -821,7 +821,16 @@ class $$PullCheckpointsTableTableManager
                 lastError: lastError,
               ),
           withReferenceMapper: (p0) => p0
-              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .map(
+                (e) => (
+                  e.readTable<$PullCheckpointsTable, PullCheckpoint>(table),
+                  BaseReferences<
+                    _$PullDatabase,
+                    $PullCheckpointsTable,
+                    PullCheckpoint
+                  >(db, table, e),
+                ),
+              )
               .toList(),
           prefetchHooksCallback: null,
         ),
