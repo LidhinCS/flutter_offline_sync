@@ -5,6 +5,9 @@ hero:
   name: offline_sync
   text: Offline-first sync for Flutter
   tagline: Push write queue, pull coordinator, Workmanager adapters, and optional UI widgets.
+  image:
+    src: /hero.png
+    alt: Flutter offline sync — phone, local database, and offline indicator
   actions:
     - theme: brand
       text: Get started

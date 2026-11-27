@@ -11,3 +11,11 @@
   height: 32px;
   width: auto;
 }
+
+/* Square concept art — keep hero image from dominating the first viewport */
+.VPHero .image-src {
+  max-width: min(360px, 70vw);
+  max-height: 360px;
+  object-fit: contain;
+}
+
