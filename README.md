@@ -1,5 +1,9 @@
 # offline_sync
 
+<p align="center">
+  <img src="docs/public/hero.png" alt="Flutter offline sync — phone, local database, and offline indicator" width="420" />
+</p>
+
 Offline-first sync for Flutter/Dart: **push** write queue, **pull** coordinator, Flutter adapters, and optional UI widgets.
 
 📖 **[Documentation](https://lidhin.github.io/flutter_offline_sync/)** · [GitHub](https://github.com/LidhinCS/flutter_offline_sync) · [Changelog](https://lidhin.github.io/flutter_offline_sync/changelog)
